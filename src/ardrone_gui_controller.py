@@ -8,9 +8,87 @@ import rospy, roslaunch, sys, select, termios, tty, commands
 from std_msgs.msg import String
 from geometry_msgs.msg import Twist      # for sending commands to the drone
 from sensor_msgs.msg import Joy
+from std_msgs.msg import Empty
+from ardrone_autonomy.msg import Navdata
 
-from drone_controller import BasicDroneController
 # from keyboard_controller import keyboardController
+COMMAND_PERIOD = 100 #ms
+
+
+class DroneStatus(object):
+	Emergency = 0
+	Inited    = 1
+	Landed    = 2
+	Flying    = 3
+	Hovering  = 4
+	Test      = 5
+	TakingOff = 6
+	GotoHover = 7
+	Landing   = 8
+	Looping   = 9
+
+
+class BasicDroneController(object):
+	controllerSelect = "None"
+	def __init__(self):
+		# Holds the current drone status
+		self.status = -1
+
+		# Subscribe to the /ardrone/navdata topic, of message type navdata, and call self.ReceiveNavdata when a message is received
+		self.subNavdata = rospy.Subscriber('/ardrone/navdata',Navdata,self.ReceiveNavdata, queue_size=10) 
+		
+		# Allow the controller to publish to the /ardrone/takeoff, land and reset topics
+		self.pubLand    = rospy.Publisher('/ardrone/land',Empty, queue_size=10)
+		self.pubTakeoff = rospy.Publisher('/ardrone/takeoff',Empty, queue_size=10)
+		self.pubReset   = rospy.Publisher('/ardrone/reset',Empty, queue_size=10)
+		
+		# Allow the controller to publish to the /cmd_vel topic and thus control the drone
+		self.pubCommand = rospy.Publisher('/cmd_vel',Twist, queue_size=10)
+		
+		# Setup regular publishing of control packets
+		self.command = Twist()
+		self.commandTimer = rospy.Timer(rospy.Duration(COMMAND_PERIOD/1000.0),self.SendCommand)
+
+		# Land the drone if we are shutting down
+		rospy.on_shutdown(self.SendLand)
+
+	def ReceiveNavdata(self,navdata):
+		# Although there is a lot of data in this packet, we're only interested in the state at the moment	
+		self.status = navdata.state
+
+	def SendTakeoff(self,ID):
+		# Send a takeoff message to the ardrone driver
+		# Note we only send a takeoff message if the drone is landed - an unexpected takeoff is not good!
+		if(self.status == DroneStatus.Landed and ID==self.controllerSelect):
+			self.pubTakeoff.publish(Empty())
+
+	def SendLand(self,ID):
+		# Send a landing message to the ardrone driver
+		# Note we send this in all states, landing can do no harm
+		if(ID==self.controllerSelect):
+			self.pubLand.publish(Empty())
+
+	def SendEmergency(self,ID):
+		# Send an emergency (or reset) message to the ardrone driver
+		if(ID==self.controllerSelect):
+			self.pubReset.publish(Empty())
+
+	def SetCommand(self,roll=0,pitch=0,yaw_velocity=0,z_velocity=0,ID="None"):
+		# Called by the main program to set the current command
+		if ID == self.controllerSelect:
+			self.command.linear.x  = pitch
+			self.command.linear.y  = roll
+			self.command.linear.z  = z_velocity
+			self.command.angular.z = yaw_velocity
+		else:
+			print "ERROR: "+ID+" Controller access denied. Current controller is "+self.controllerSelect
+
+	def SendCommand(self,event):
+		# The previously set command is then sent out periodically if the drone is flying
+		if self.status == DroneStatus.Flying or self.status == DroneStatus.GotoHover or self.status == DroneStatus.Hovering:
+			self.pubCommand.publish(self.command)
+
+
 
 
 class KeyMapping(object):
@@ -29,22 +107,18 @@ class KeyMapping(object):
 
 
 class keyboardController:
-    ID = "Keyboard"
     pitch = 0
     roll = 0
     yaw_velocity = 0 
     z_velocity = 0
     counter = 0
     def __init__(self, master):
-        self.master = master
+    	self.ID = "Keyboard"
         self.newWindow = tk.Toplevel()
         self.newWindow.title("Keyboard Controller")
         self.newWindow.geometry("%dx%d%+d%+d" % (300, 280, 250, 125))
-        self.frame = tk.Frame(self.master)
-        self.frame.bind("<Key>", self.key)
-        self.frame.bind("<Button-1>", self.callback)
-        self.frame.pack()
-
+        self.newWindow.bind("<Key>", self.key)
+        self.newWindow.bind("<Button-1>", self.callback)
         tk.Label(self.newWindow, text="\n\n---------------------\n|  "+KeyMapping.PitchForward+"    "+KeyMapping.Takeoff+KeyMapping.Land+KeyMapping.Emergency+"    "+KeyMapping.IncreaseAltitude+"  |\n| "+KeyMapping.RollLeft+KeyMapping.PitchBackward+KeyMapping.RollRight+"          "+KeyMapping.YawLeft+KeyMapping.DecreaseAltitude+KeyMapping.YawRight+" |\n---------------------\n\n "+KeyMapping.PitchForward+KeyMapping.PitchBackward+": Pitch\n "+KeyMapping.RollLeft+KeyMapping.RollRight+": Roll\n "+KeyMapping.IncreaseAltitude+KeyMapping.DecreaseAltitude+": Height\n "+KeyMapping.YawLeft+KeyMapping.YawRight+": Yaw\n\n "+KeyMapping.Takeoff+": Takeoff\n "+KeyMapping.Land+": Land\n "+KeyMapping.Emergency+": Emergency", justify=tk.LEFT).pack()
         
 
@@ -53,11 +127,11 @@ class keyboardController:
         if key != '':
             self.counter = 0
             if key == KeyMapping.Takeoff:
-                CONTROLLER.SendTakeoff()
+                CONTROLLER.SendTakeoff(self.ID)
             elif key == KeyMapping.Land:
-                CONTROLLER.SendLand()
+                CONTROLLER.SendLand(self.ID)
             elif key == KeyMapping.Emergency:
-                CONTROLLER.SendEmergency()
+                CONTROLLER.SendEmergency(self.ID)
             else:
                 if key == KeyMapping.PitchForward:
                     self.pitch += 1
@@ -79,7 +153,7 @@ class keyboardController:
                     rospy.signal_shutdown('Great Flying!')
                     sys.exit(1)
                 else:
-                    print "Not a configured key"
+                    print "ERROR: Not a configured key"
         else:
             if self.counter == 4:
                 self.pitch = 0
@@ -89,14 +163,14 @@ class keyboardController:
                 self.counter+=1
             elif self.counter<4:
                 self.counter+=1
+
         CONTROLLER.SetCommand(self.roll, self.pitch, self.yaw_velocity, self.z_velocity,self.ID)
 
     def callback(self,event):
-        self.frame.focus_set()
+        self.newWindow.focus_set()
 
 
 class gamepadController:
-    ID = "Gamepad"
     # Get joystick controller
     device = commands.getoutput('ls /dev/input/js*')
 
@@ -119,14 +193,10 @@ class gamepadController:
 
     
     def __init__(self, master):
-        self.master = master
+    	self.ID = "Gamepad"
         self.newWindow = tk.Toplevel()
         self.newWindow.title("Gamepad Controller")
         self.newWindow.protocol("WM_DELETE_WINDOW", self.close)
-        
-        # Configure GUI
-        self.frame = tk.Frame(self.master)
-        self.frame.pack()
 
         photo = tk.PhotoImage(file=PATH+"gamepad.gif")
         pictureLabel = tk.Label(self.newWindow, image=photo)
@@ -165,13 +235,13 @@ class gamepadController:
     def ReceiveJoystickMessage(self,data):
         if data.buttons[self.ButtonEmergency]==1:
             rospy.loginfo("Emergency Button Pressed")
-            CONTROLLER.SendEmergency()
+            CONTROLLER.SendEmergency(self.ID)
         elif data.buttons[self.ButtonLand]==1:
             rospy.loginfo("Land Button Pressed")
-            CONTROLLER.SendLand()
+            CONTROLLER.SendLand(self.ID)
         elif data.buttons[self.ButtonTakeoff]==1:
             rospy.loginfo("Takeoff Button Pressed")
-            CONTROLLER.SendTakeoff()
+            CONTROLLER.SendTakeoff(self.ID)
         else:
             CONTROLLER.SetCommand(data.axes[self.AxisRoll]/self.ScaleRoll,data.axes[self.AxisPitch]/self.ScalePitch,data.axes[self.AxisYaw]/self.ScaleYaw,data.axes[self.AxisZ]/self.ScaleZ, self.ID)
     
@@ -184,17 +254,12 @@ class gamepadController:
 class rosRelayer:
     ID = "AI"
     def __init__(self, master):
-        self.master = master
         self.newWindow = tk.Toplevel()
         self.newWindow.title("AI Controller Relay")
         self.newWindow.protocol("WM_DELETE_WINDOW", self.close)
 
         self.pub = rospy.Publisher('cmd_vel', Twist, queue_size=10)
         self.sub = rospy.Subscriber("ardrone_thesis/ai_cmd_vel", Twist, self.callbackRelay)
-        
-        # Configure GUI
-        self.frame = tk.Frame(self.master)
-        self.frame.pack()
 
         tk.Label(self.newWindow, text="\n\nThis tool forwards Twist messages from\n\n'ardrone_thesis/ai_cmd_vel'\n\nTo\n\n'cmd_vel'", justify=tk.LEFT).pack()
         self.newWindow.geometry("%dx%d%+d%+d" % (300, 180, 550, 125))

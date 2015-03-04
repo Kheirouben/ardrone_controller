@@ -1,0 +1,4 @@
+<launch>
+
+	<node name="slam_viewer" pkg="lsd_slam_viewer" type="viewer" respawn="false" output="screen" />
+</launch>

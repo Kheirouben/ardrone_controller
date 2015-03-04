@@ -15,11 +15,11 @@ include_directories(
 
 install(PROGRAMS 
 	src/ardrone_gui_controller.py
-    src/drone_controller.py
-    src/drone_status.py
     src/gamepad.gif
     src/ardrone.gif
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
-
+install(DIRECTORY launch/
+DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
+)
