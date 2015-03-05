@@ -88,9 +88,6 @@ class BasicDroneController(object):
 		if self.status == DroneStatus.Flying or self.status == DroneStatus.GotoHover or self.status == DroneStatus.Hovering:
 			self.pubCommand.publish(self.command)
 
-
-
-
 class KeyMapping(object):
     PitchForward     = "e"
     PitchBackward    = "d"
@@ -118,14 +115,21 @@ class keyboardController:
         self.newWindow.title("Keyboard Controller")
         self.newWindow.geometry("%dx%d%+d%+d" % (300, 280, 250, 125))
         self.newWindow.bind("<Key>", self.key)
-        self.newWindow.bind("<Button-1>", self.callback)
+        self.newWindow.bind("<KeyRelease>", self.onkeyrelease)
+        # self.newWindow.bind("<Button-1>", self.callback)
         tk.Label(self.newWindow, text="\n\n---------------------\n|  "+KeyMapping.PitchForward+"    "+KeyMapping.Takeoff+KeyMapping.Land+KeyMapping.Emergency+"    "+KeyMapping.IncreaseAltitude+"  |\n| "+KeyMapping.RollLeft+KeyMapping.PitchBackward+KeyMapping.RollRight+"          "+KeyMapping.YawLeft+KeyMapping.DecreaseAltitude+KeyMapping.YawRight+" |\n---------------------\n\n "+KeyMapping.PitchForward+KeyMapping.PitchBackward+": Pitch\n "+KeyMapping.RollLeft+KeyMapping.RollRight+": Roll\n "+KeyMapping.IncreaseAltitude+KeyMapping.DecreaseAltitude+": Height\n "+KeyMapping.YawLeft+KeyMapping.YawRight+": Yaw\n\n "+KeyMapping.Takeoff+": Takeoff\n "+KeyMapping.Land+": Land\n "+KeyMapping.Emergency+": Emergency", justify=tk.LEFT).pack()
         
+    def onkeyrelease(self,event):
+        self.pitch = 0
+        self.roll = 0
+        self.yaw_velocity = 0 
+        self.z_velocity = 0
+        CONTROLLER.SetCommand(self.roll, self.pitch, self.yaw_velocity, self.z_velocity,self.ID)
 
     def key(self,event):
         key = event.char
         if key != '':
-            self.counter = 0
+            #self.counter = 0
             if key == KeyMapping.Takeoff:
                 CONTROLLER.SendTakeoff(self.ID)
             elif key == KeyMapping.Land:
@@ -154,20 +158,11 @@ class keyboardController:
                     sys.exit(1)
                 else:
                     print "ERROR: Not a configured key"
-        else:
-            if self.counter == 4:
-                self.pitch = 0
-                self.roll = 0
-                self.yaw_velocity = 0 
-                self.z_velocity = 0
-                self.counter+=1
-            elif self.counter<4:
-                self.counter+=1
 
         CONTROLLER.SetCommand(self.roll, self.pitch, self.yaw_velocity, self.z_velocity,self.ID)
 
-    def callback(self,event):
-        self.newWindow.focus_set()
+    # def callback(self,event):
+    #     self.newWindow.focus_set()
 
 
 class gamepadController:
@@ -302,7 +297,7 @@ class ardroneGUIController:
         self.var1.set("Select controller")
         self.var2 = tk.StringVar()
         labelParam = tk.Label(self.frame, textvariable=self.var2)
-        self.var2.set("Set AR Drone Parameters")
+        self.var2.set("Set AR Drone Parameters (Set doesn't work yet)")
         # Image
         photo = tk.PhotoImage(file=PATH+"ardrone.gif")
         pictureLabel = tk.Label(self.frame, image=photo)
