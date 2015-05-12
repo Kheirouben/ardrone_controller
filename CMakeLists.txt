@@ -14,10 +14,14 @@ include_directories(
 )
 
 install(PROGRAMS 
-	src/ardrone_gui_controller.py
-    src/gamepad.gif
-    src/ardrone.gif
+	scripts/ardrone_gui_controller.py
+	scripts/target_marker.py
+	scripts/point_publisher.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+install(DIRECTORY media/
+	DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
 install(DIRECTORY launch/
