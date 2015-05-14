@@ -8,7 +8,9 @@ from std_msgs.msg import String
 import rospy, math, tf
 
 def callback(data):
-    rospy.loginfo(rospy.get_caller_id() + "I heard (%f,%f,%f)", data.point.x, data.point.y, data.point.z)
+    rospy.loginfo(rospy.get_caller_id() + " I heard (%f,%f,%f)", data.point.x, data.point.y, data.point.z)
+    data.header.stamp = rospy.Time()
+    print data.header.stamp
     marker = Marker()
     marker.header.frame_id = "/map"
     marker.type = marker.SPHERE

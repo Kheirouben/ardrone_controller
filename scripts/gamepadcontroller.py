@@ -26,14 +26,16 @@ class gamepadController:
     
     def __init__(self, master, CONTROLLER):
     	self.ID = "Gamepad"
-        self.newWindow = tk.Toplevel()
-        self.newWindow.title("Gamepad Controller")
-        self.newWindow.protocol("WM_DELETE_WINDOW", self.close)
+        self.window = tk.Toplevel()
+        self.window.title("Gamepad Controller")
+        img = tk.PhotoImage(file=CONTROLLER.PATH+'/media/gamepadlogo.gif')
+        self.window.tk.call('wm', 'iconphoto', self.window._w, img)
+        self.window.protocol("WM_DELETE_WINDOW", self.close)
         
         self.controller = CONTROLLER
 
-        photo = tk.PhotoImage(file=self.controller.PATH+"gamepad.gif")
-        pictureLabel = tk.Label(self.newWindow, image=photo)
+        photo = tk.PhotoImage(file=self.controller.PATH+"/media/gamepad.gif")
+        pictureLabel = tk.Label(self.window, image=photo)
         pictureLabel.photo = photo
         pictureLabel.pack()
 
@@ -85,4 +87,4 @@ class gamepadController:
             self.process.stop()
         except AttributeError:
             print 'Process could not be stopped'
-        self.newWindow.destroy()
+        self.window.destroy()

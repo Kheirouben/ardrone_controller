@@ -12,9 +12,9 @@ def talker():
     m = PointStamped()
     m.header.frame_id = '/tum_base_frontcam'
     while not rospy.is_shutdown():
-        m.header.stamp = rospy.Time()
+        m.header.stamp = rospy.Time.now()
         m.point.x = 0.0
-        m.point.y = 0.0
+        m.point.y = 1.0
         m.point.z = 1.0
         log_str = "Send point to /pointcloudregistration/target"
         rospy.loginfo(log_str)

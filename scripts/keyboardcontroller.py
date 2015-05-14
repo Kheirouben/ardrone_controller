@@ -1,5 +1,5 @@
 import Tkinter as tk
-import rospy
+
 #from basicdronecontroller import *
 from ardrone_gui_controller import *
 
@@ -26,13 +26,15 @@ class keyboardController:
     counter = 0
     def __init__(self, master, CONTROLLER):
         self.ID = "Keyboard"
-        self.newWindow = tk.Toplevel()
-        self.newWindow.title("Keyboard Controller")
-        self.newWindow.geometry("%dx%d%+d%+d" % (300, 280, 250, 125))
-        self.newWindow.bind("<Key>", self.key)
-        self.newWindow.bind("<KeyRelease>", self.onkeyrelease)
-        # self.newWindow.bind("<Button-1>", self.callback)
-        tk.Label(self.newWindow, text="\n\n---------------------\n|  "+keyMapping.pitchForward+"    "+keyMapping.takeoff+keyMapping.land+keyMapping.emergency+"    "+keyMapping.increaseAltitude+"  |\n| "+keyMapping.rollLeft+keyMapping.pitchBackward+keyMapping.rollRight+"          "+keyMapping.yawLeft+keyMapping.decreaseAltitude+keyMapping.yawRight+" |\n---------------------\n\n "+keyMapping.pitchForward+keyMapping.pitchBackward+": pitch\n "+keyMapping.rollLeft+keyMapping.rollRight+": Roll\n "+keyMapping.increaseAltitude+keyMapping.decreaseAltitude+": Height\n "+keyMapping.yawLeft+keyMapping.yawRight+": Yaw\n\n "+keyMapping.takeoff+": takeoff\n "+keyMapping.land+": Land\n "+keyMapping.emergency+": Emergency", justify=tk.LEFT).pack()
+        self.window = tk.Toplevel()
+        self.window.title("Keyboard Controller")
+        img = tk.PhotoImage(file=CONTROLLER.PATH+'/media/keyboardlogo.gif')
+        self.window.tk.call('wm', 'iconphoto', self.window._w, img)
+        self.window.geometry("%dx%d%+d%+d" % (300, 280, 250, 125))
+        self.window.bind("<Key>", self.key)
+        self.window.bind("<KeyRelease>", self.onkeyrelease)
+        # self.window.bind("<Button-1>", self.callback)
+        tk.Label(self.window, text="\n\n---------------------\n|  "+keyMapping.pitchForward+"    "+keyMapping.takeoff+keyMapping.land+keyMapping.emergency+"    "+keyMapping.increaseAltitude+"  |\n| "+keyMapping.rollLeft+keyMapping.pitchBackward+keyMapping.rollRight+"          "+keyMapping.yawLeft+keyMapping.decreaseAltitude+keyMapping.yawRight+" |\n---------------------\n\n "+keyMapping.pitchForward+keyMapping.pitchBackward+": pitch\n "+keyMapping.rollLeft+keyMapping.rollRight+": Roll\n "+keyMapping.increaseAltitude+keyMapping.decreaseAltitude+": Height\n "+keyMapping.yawLeft+keyMapping.yawRight+": Yaw\n\n "+keyMapping.takeoff+": takeoff\n "+keyMapping.land+": Land\n "+keyMapping.emergency+": Emergency", justify=tk.LEFT).pack()
         self.controller= CONTROLLER
 
         

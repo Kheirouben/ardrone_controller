@@ -1,5 +1,5 @@
 import Tkinter as tk
-import roslib, rospy, os
+import roslib, rospy, rospkg, os
 from geometry_msgs.msg import Twist
 from std_msgs.msg import Empty
 from ardrone_autonomy.msg import Navdata
@@ -23,7 +23,8 @@ class basicDroneController(object):
     def __init__(self):
         # Holds the current drone status
         self.status = -1
-        self.PATH = os.path.dirname(os.path.abspath(__file__)) + "/../media/"
+        rospack = rospkg.RosPack()
+        self.PATH = rospack.get_path('ardrone_controller')
         self.COMMAND_PERIOD = 100 #ms
         # Subscribe to the /ardrone/navdata topic, of message type navdata, and call self.receiveNavdata when a message is received
         self.subNavdata = rospy.Subscriber('/ardrone/navdata',Navdata,self.receiveNavdata, queue_size=10) 

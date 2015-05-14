@@ -30,7 +30,7 @@ class ardroneGUIController:
         labelParam = tk.Label(self.frame, textvariable=self.var2)
         self.var2.set("Set AR Drone Parameters (Set doesn't work yet)")
         # Image
-        photo = tk.PhotoImage(file=self.controller.PATH+"ardrone.gif")
+        photo = tk.PhotoImage(file=self.controller.PATH+"/media/ardrone.gif")
         pictureLabel = tk.Label(self.frame, image=photo)
         pictureLabel.photo = photo
         # Parameter entries
