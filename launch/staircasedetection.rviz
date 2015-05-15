@@ -8,6 +8,7 @@ Panels:
         - /Status1
         - /TF1
         - /TF1/Frames1
+        - /Image1
         - /MarkerArray1
         - /MarkerArray2
       Splitter Ratio: 0.66242
@@ -69,8 +70,6 @@ Visualization Manager:
           Value: true
         odom:
           Value: true
-        tum_base_frontcam:
-          Value: true
         tum_base_link:
           Value: true
       Marker Scale: 1
@@ -83,8 +82,7 @@ Visualization Manager:
           cam_front:
             {}
           tum_base_link:
-            tum_base_frontcam:
-              {}
+            {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -110,7 +108,7 @@ Visualization Manager:
       Visual Enabled: true
     - Class: rviz/Image
       Enabled: true
-      Image Topic: /ardrone/image_raw
+      Image Topic: /registrar/candidates
       Max Value: 1
       Median window: 5
       Min Value: 0
@@ -171,10 +169,10 @@ Visualization Manager:
         Z: -0.150672
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.749797
+      Pitch: 0.624797
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 4.34222
+      Yaw: 3.94722
     Saved: ~
 Window Geometry:
   Displays:
@@ -194,5 +192,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1232
-  X: 66
-  Y: 312
+  X: 558
+  Y: 363

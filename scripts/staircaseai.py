@@ -11,6 +11,7 @@ class staircaseAI:
     ID = "AI"
     rvizStatus = 0
     detectionStatus = 0
+    tumArdroneStatus = 0
     def __init__(self, master, CONTROLLER):
         """Initialize the AI class"""
 
@@ -155,28 +156,26 @@ class staircaseAI:
             self.log('Detection node is shut down')
 
     def launchArdroneDriver(self):
-        # Launch lsd_slam_core
-        node = roslaunch.core.Node('ardrone_autonomy','ardrone_driver','ardrone_driver','','','-ip 192.168.2.165')
-        launch = roslaunch.scriptapi.ROSLaunch()
-        launch.start()
-        self.ardroneDriverProcess = launch.launch(node)
-        dynConfArdroneDriver = dynamic_reconfigure.client.Client('ardrone_driver')
-        params = { 'navdata_demo' : False, 'realtime_navdata' : True, 'realtime_video' : True, 'looprate' : 30, 'altitude_max' : 10000 }
-        config = dynConfArdroneDriver.update_configuration(params)
-        client = dynamic_reconfigure.client.Client('ardrone_driver')
         # Launch tum_ardrone
-        node = roslaunch.core.Node('tum_ardrone','drone_stateestimation','drone_stateestimation_ardrone')
-        launch = roslaunch.scriptapi.ROSLaunch()
-        launch.start()
-        self.droneStateestimationProcess = launch.launch(node)
-        node = roslaunch.core.Node('tum_ardrone','drone_autopilot','drone_autopilot_ardrone')
-        launch = roslaunch.scriptapi.ROSLaunch()
-        launch.start()
-        self.droneAutopilotProcess = launch.launch(node)
-        node = roslaunch.core.Node('tum_ardrone','drone_gui','drone_gui_ardrone')
-        launch = roslaunch.scriptapi.ROSLaunch()
-        launch.start()
-        self.droneGuiProcess = launch.launch(node)
+        if self.tumArdroneStatus==0:
+	    node = roslaunch.core.Node('tum_ardrone','drone_stateestimation','drone_stateestimation_ardrone')
+	    launch = roslaunch.scriptapi.ROSLaunch()
+	    launch.start()
+	    self.droneStateestimationProcess = launch.launch(node)
+	    node = roslaunch.core.Node('tum_ardrone','drone_autopilot','drone_autopilot_ardrone')
+	    launch = roslaunch.scriptapi.ROSLaunch()
+	    launch.start()
+	    self.droneAutopilotProcess = launch.launch(node)
+	    node = roslaunch.core.Node('tum_ardrone','drone_gui','drone_gui_ardrone')
+	    launch = roslaunch.scriptapi.ROSLaunch()
+	    launch.start()
+	    self.droneGuiProcess = launch.launch(node)
+            self.tumArdroneStatus=1
+        else:
+            self.droneStateestimationProcess.stop()
+            self.droneAutopilotProcess.stop()
+            self.droneGuiProcess.stop()
+            self.tumArdroneStatus=0
 
     def stopAI(self):
         command = 'c stop'
@@ -227,5 +226,9 @@ class staircaseAI:
             self.detectionProcess.stop()
             self.lsdslamProcess.stop()
             self.imageRectifyProcess.stop()
+        if self.tumArdroneStatus==1:
+            self.droneStateestimationProcess.stop()
+            self.droneAutopilotProcess.stop()
+            self.droneGuiProcess.stop()
 
         rospy.loginfo("AI Controller is destroyed")
