@@ -1,11 +1,11 @@
 import Tkinter as tk
 import rospy, roslaunch, math, logging, os
 from geometry_msgs.msg import Twist, PointStamped
+from std_msgs.msg import String
 from threading import Thread
 import dynamic_reconfigure.client
 from clusterNode import *
-
-
+from basicdronecontroller import droneStatus
 
 class staircaseAI:
     ID = "AI"
@@ -13,6 +13,8 @@ class staircaseAI:
     detectionStatus = 0
     def __init__(self, master, CONTROLLER):
         """Initialize the AI class"""
+
+        # GUI STUFF
         self.window = tk.Toplevel()
         self.window.title("AI Controller")
         img = tk.PhotoImage(file=CONTROLLER.PATH+'/media/ailogo.gif')
@@ -25,29 +27,40 @@ class staircaseAI:
         # Grid size = 6x6 --> Unit size:
         uW=int(windowWidth/26)
         uH=int(windowHeight/200)
-        # GUI STUFF
-        # Define titles
-        titleLeft = tk.Label(self.window, text="AI Controller", font=("Helvetica", 18))
-        titleRightUp = tk.Label(self.window, text="Launch and Visualization", font=("Helvetica", 18))
-        titleDown = tk.Label(self.window, text="Log", font=("Helvetica", 18))
-        # Define buttons (LEFT)
-        scanBtn     = tk.Button(self.window,text="Scan Envrionment",command=self.close)
-        takeoverBtn = tk.Button(self.window,text="AI Takeover",command=self.close)
-        goBtn       = tk.Button(self.window,text="Go",command=self.close)
-        returnBtn   = tk.Button(self.window,text="Return",command=self.close)
-        stopBtn     = tk.Button(self.window,text="Stop",command=self.close)
-        # Define buttons (RIGHT)
-        detectionBtn= tk.Button(self.window,text="Launch detection",command=self.launchPointcloudregistration)
-        self.rvizBtnText = tk.StringVar(); self.rvizBtnText.set("Launch RVIZ")
-        rvizBtn   = tk.Button(self.window,textvariable=self.rvizBtnText,command=self.launchRVIZ)
-        updateClusterBtn   = tk.Button(self.window,text="Update Cluster",command=self.close)
-        resetClusterBtn = tk.Button(self.window,text="Reset Cluster",command=self.close)
         # Define log widget
         logViewer = tk.Scrollbar(self.window)
         self.logText = tk.Text(self.window)
         self.logText.focus_set()
         logViewer.config(command=self.logText.yview)
         self.logText.config(yscrollcommand=logViewer.set,height=int(windowHeight/30))
+
+        # Start controller and detection mechanism
+        self.controller = CONTROLLER
+        self.log('Controller started')
+
+        self.detectionMarkerPublisher = rospy.Publisher('staircase_detectionmarker_visualization', MarkerArray, queue_size=10)
+        self.goalMarkerPublisher = rospy.Publisher('staircase_goalmarker_visualization', MarkerArray, queue_size=10)
+        self.tumComChannel = rospy.Publisher('/tum_ardrone/com', String, queue_size=10)
+        self.cluster = clusterNode(self.log,self.detectionMarkerPublisher,self.goalMarkerPublisher,'t',150.0)
+        self.targetSub = rospy.Subscriber('/pointcloudregistration/target', PointStamped, cluster.processPoints, queue_size=10)
+
+        # Other GUI STUFF
+        # Define titles
+        titleLeft = tk.Label(self.window, text="AI Controller", font=("Helvetica", 18))
+        titleRightUp = tk.Label(self.window, text="Launch and Visualization", font=("Helvetica", 18))
+        titleDown = tk.Label(self.window, text="Log", font=("Helvetica", 18))
+        # Define buttons (LEFT)
+        scanBtn     = tk.Button(self.window,text="Scan Envrionment",command=self.initializeAI)
+        takeoverBtn = tk.Button(self.window,text="AI Takeover",command=self.goAI)
+        goBtn       = tk.Button(self.window,text="Go",command=self.goAI)
+        returnBtn   = tk.Button(self.window,text="Return",command=self.close)
+        stopBtn     = tk.Button(self.window,text="Stop",command=self.stopAI)
+        # Define buttons (RIGHT)
+        detectionBtn= tk.Button(self.window,text="Launch detection",command=self.launchPointcloudregistration)
+        self.rvizBtnText = tk.StringVar(); self.rvizBtnText.set("Launch RVIZ")
+        rvizBtn   = tk.Button(self.window,textvariable=self.rvizBtnText,command=self.launchRVIZ)
+        updateClusterBtn   = tk.Button(self.window,text="Update Cluster",command=self.cluster.update)
+        resetClusterBtn = tk.Button(self.window,text="Reset Cluster",command=self.cluster.reset)
 
         # Place titles and buttons in grid
         titleLeft.grid(row=0,column=0,columnspan=3,sticky=tk.N+tk.E+tk.S+tk.W)
@@ -62,21 +75,10 @@ class staircaseAI:
         detectionBtn.grid(row=1,column=3,columnspan=3,sticky=tk.N+tk.E+tk.S+tk.W)
         rvizBtn.grid(row=2,column=3,columnspan=3,sticky=tk.N+tk.E+tk.S+tk.W)
         updateClusterBtn.grid(row=3,column=3,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
-        resetClusterBtn.grid(row=3,column=4,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
+        resetClusterBtn.grid(row=3,column=5,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
 
         titleDown.grid(row=4,column=0,columnspan=6,sticky=tk.N+tk.E+tk.S+tk.W)
         self.logText.grid(row=5,column=0,columnspan=6,sticky=tk.N+tk.E+tk.W)
-
-
-        # Start 
-        self.controller = CONTROLLER
-        self.log('Controller started')
-
-        self.detectionMarkerPublisher = rospy.Publisher('staircase_detectionmarker_visualization', MarkerArray, queue_size=10)
-        self.goalMarkerPublisher = rospy.Publisher('staircase_goalmarker_visualization', MarkerArray, queue_size=10)
-        cluster = clusterNode(self.log,self.detectionMarkerPublisher,self.goalMarkerPublisher,'t',150.0)
-        self.targetSub = rospy.Subscriber('/pointcloudregistration/target', PointStamped, cluster.processPoints, queue_size=10)
-
 
         self.log('AI initialized and ready to roll')
 
@@ -150,6 +152,39 @@ class staircaseAI:
             self.detectionStatus=0
             self.log('Detection node is shut down')
 
+    def stopAI(self):
+        command = 'c stop'
+        self.tumComChannel.publish(command)
+
+    def goAI(self):
+        self.log('Sending command to the drone')
+        if len(self.cluster.targetPoint)!=0:
+            commands = []
+            commands.append('c clearCommands')
+            commands.append('c goto %f %f %f 0' % (self.cluster.targetPoint[0],self.cluster.targetPoint[1],self.cluster.targetPoint[2]))
+            # Publish commands
+            for i in range(0,len(commands)):
+                self.tumComChannel.publish(commands[i])
+
+    def initializeAI(self):
+        self.log('Initializing AI')
+        if self.controller.status == droneStatus.Flying or self.status == droneStatus.GotoHover or self.status == droneStatus.Hovering:
+            self.log('Drone is already in the air')
+        else:
+            commands = []
+            commands.append('c autoInit 500 800 4000 0.5')
+            commands.append('c setReference $POSE$')
+            commands.append('c setInitialReachDist 0.2')
+            commands.append('c setStayWithinDist 0.3')
+            commands.append('c setStayTime 3')
+            commands.append('c lockScaleFP')
+            commands.append('c goto 0 0 0 0')
+            commands.append('c start')
+            # Publish commands
+            for i in range(0,len(commands)):
+                self.tumComChannel.publish(commands[i])
+
+        
 
     def close(self):
         """Close the AI GUI interface"""

@@ -118,6 +118,16 @@ class clusterNode:
         self.goalMarker = markerArrayRVIZ(1,0.5,[0,1,0],'/map',goalPUB)
         self.log('ClusterNode initialized: listening to detection output')
         
+    def reset(self):
+        self.targetPoint = []
+        self.pointArray = []
+        self.targetLocked = 0
+        self.log('ClusterNode will be reset with the next detected point')
+
+    def update(self):
+        self.targetPoint = []
+        self.targetLocked = 0
+        self.log('ClusterNode will be updated with the next detected point')
 
     def processPoints(self,pointStamped):
         """Process incoming points. Project to '/map' coordinates and puts them into an array"""
