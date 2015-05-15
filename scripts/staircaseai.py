@@ -3,6 +3,8 @@ import rospy, roslaunch, math, logging, os
 from geometry_msgs.msg import Twist, PointStamped
 from threading import Thread
 import dynamic_reconfigure.client
+from clusterNode import *
+
 
 
 class staircaseAI:
@@ -38,9 +40,8 @@ class staircaseAI:
         detectionBtn= tk.Button(self.window,text="Launch detection",command=self.launchPointcloudregistration)
         self.rvizBtnText = tk.StringVar(); self.rvizBtnText.set("Launch RVIZ")
         rvizBtn   = tk.Button(self.window,textvariable=self.rvizBtnText,command=self.launchRVIZ)
-        targetBtn   = tk.Button(self.window,text="Targets",command=self.close)
-        obstacleBtn = tk.Button(self.window,text="Obstacles",command=self.close)
-        trailBtn    = tk.Button(self.window,text="Trail",command=self.close)
+        updateClusterBtn   = tk.Button(self.window,text="Update Cluster",command=self.close)
+        resetClusterBtn = tk.Button(self.window,text="Reset Cluster",command=self.close)
         # Define log widget
         logViewer = tk.Scrollbar(self.window)
         self.logText = tk.Text(self.window)
@@ -60,29 +61,25 @@ class staircaseAI:
         titleRightUp.grid(row=0,column=3,columnspan=3,sticky=tk.N+tk.E+tk.S+tk.W)
         detectionBtn.grid(row=1,column=3,columnspan=3,sticky=tk.N+tk.E+tk.S+tk.W)
         rvizBtn.grid(row=2,column=3,columnspan=3,sticky=tk.N+tk.E+tk.S+tk.W)
-        targetBtn.grid(row=3,column=3,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
-        obstacleBtn.grid(row=3,column=4,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
-        trailBtn.grid(row=3,column=5,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
+        updateClusterBtn.grid(row=3,column=3,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
+        resetClusterBtn.grid(row=3,column=4,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
 
         titleDown.grid(row=4,column=0,columnspan=6,sticky=tk.N+tk.E+tk.S+tk.W)
         self.logText.grid(row=5,column=0,columnspan=6,sticky=tk.N+tk.E+tk.W)
 
 
         # Start 
-        self.pub = rospy.Publisher('cmd_vel', Twist, queue_size=10)
-        
-        
         self.controller = CONTROLLER
+        self.log('Controller started')
+
+        self.detectionMarkerPublisher = rospy.Publisher('staircase_detectionmarker_visualization', MarkerArray, queue_size=10)
+        self.goalMarkerPublisher = rospy.Publisher('staircase_goalmarker_visualization', MarkerArray, queue_size=10)
+        cluster = clusterNode(self.log,self.detectionMarkerPublisher,self.goalMarkerPublisher,'t',150.0)
+        self.targetSub = rospy.Subscriber('/pointcloudregistration/target', PointStamped, cluster.processPoints, queue_size=10)
+
 
         self.log('AI initialized and ready to roll')
 
-    def callbackRelay(self,data):
-        rospy.loginfo("Relaying message: %s",data)
-        if self.controller.controllerSelect == self.ID:
-            if not rospy.is_shutdown():
-                self.pub.publish(data)
-        else:
-            print "ERROR: AI Controller access denied. Current controller is "+self.controller.controllerSelect
     def log(self,string):
         """Puts text in the logscreen of the AI GUI"""
         self.logText.insert(1.0,string+'\n')
@@ -156,7 +153,9 @@ class staircaseAI:
 
     def close(self):
         """Close the AI GUI interface"""
-        self.pub.unregister()
+        self.detectionMarkerPublisher.unregister()
+        self.goalMarkerPublisher.unregister()
+        self.targetSub.unregister()
         self.window.destroy()
         if self.rvizStatus==1:
             self.rvizProcess.stop()

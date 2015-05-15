@@ -17,8 +17,10 @@ class markerArrayRVIZ:
     def addMarker(self,point):
         self.targetCount+=1
         if self.targetCount>self.markerMax:
+            print 'marker dropped'
             self.dropMarker()
         # Construct new marker
+        print 'New marker added, count = %d'%self.targetCount
         marker = Marker()
         marker.header.frame_id = self.referenceFrame
         marker.type = marker.SPHERE
@@ -39,16 +41,18 @@ class markerArrayRVIZ:
         marker.pose.orientation.w = 0.0
         # Add new marker to the array and publish the MarkerArray
         self.targetMarkerArray.markers.append(marker)
-        self.publisher.publish(markerArray)
 
-    def dropMarker(self):
-        self.targetMarkerArray.markers.pop(0)
         # Renumber the marker IDs
         id = 0
-        for m in markerArray.markers:
+        for m in self.targetMarkerArray.markers:
            m.id = id
            id += 1
 
+
+        self.publisher.publish(self.targetMarkerArray)
+
+    def dropMarker(self):
+        self.targetMarkerArray.markers.pop(0)
         self.targetCount-=1
 
 
