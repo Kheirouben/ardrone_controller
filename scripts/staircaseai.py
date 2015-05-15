@@ -42,7 +42,7 @@ class staircaseAI:
         self.goalMarkerPublisher = rospy.Publisher('staircase_goalmarker_visualization', MarkerArray, queue_size=10)
         self.tumComChannel = rospy.Publisher('/tum_ardrone/com', String, queue_size=10)
         self.cluster = clusterNode(self.log,self.detectionMarkerPublisher,self.goalMarkerPublisher,'t',150.0)
-        self.targetSub = rospy.Subscriber('/pointcloudregistration/target', PointStamped, cluster.processPoints, queue_size=10)
+        self.targetSub = rospy.Subscriber('/pointcloudregistration/target', PointStamped, self.cluster.processPoints, queue_size=10)
 
         # Other GUI STUFF
         # Define titles
@@ -168,11 +168,13 @@ class staircaseAI:
 
     def initializeAI(self):
         self.log('Initializing AI')
-        if self.controller.status == droneStatus.Flying or self.status == droneStatus.GotoHover or self.status == droneStatus.Hovering:
+        if self.controller.status == droneStatus.Flying or self.controller.status == droneStatus.GotoHover or self.controller.status == droneStatus.Hovering:
             self.log('Drone is already in the air')
         else:
+            self.log('Sending commands to the drone')
             commands = []
-            commands.append('c autoInit 500 800 4000 0.5')
+            commands.append('f reset')
+            commands.append('c autoInit 1000 800 4000 0.3')
             commands.append('c setReference $POSE$')
             commands.append('c setInitialReachDist 0.2')
             commands.append('c setStayWithinDist 0.3')
