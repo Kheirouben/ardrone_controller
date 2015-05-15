@@ -4,7 +4,7 @@ from visualization_msgs.msg import Marker
 from visualization_msgs.msg import MarkerArray
 import rospy
 
-class markerArrayRVIZ(object):
+class markerArrayRVIZ:
     def __init__(self,MAX,SCALE,COLOR,REFERENCEFRAME,PUBLISHER):
         self.targetMarkerArray = MarkerArray()
         self.targetCount = 0

@@ -123,22 +123,33 @@ class staircaseAI:
     def launchPointcloudregistration(self):
         """Launch pointcloudregistration with all its dependend nodes: Image Rectifier and LSD_SLAM"""
         if self.detectionStatus==0:
-            node = roslaunch.core.Node('lsd_slam_core','live_slam','lsd_slam_core_ardrone','','','','','',[('image','/ardrone/front/image_rect'),('camera_info','/ardrone/front/camera_info')])
+            # Launch image rectifier node
+            node = roslaunch.core.Node('image_proc','image_proc','image_proc_ardrone','/ardrone/front')
             launch = roslaunch.scriptapi.ROSLaunch()
             launch.start()
-            self.pointcloudregistrationProcess = launch.launch(node)
-
-            client = dynamic_reconfigure.client.Client('lsd_slam_core_ardrone')
+            self.imageRectifyProcess = launch.launch(node)
+            # Launch lsd_slam_core
+            node = roslaunch.core.Node('lsd_slam_core','live_slam','lsd_slam_core_ardrone','','','image:=/ardrone/front/image_rect camera_info:=/ardrone/front/camera_info')
+            launch = roslaunch.scriptapi.ROSLaunch()
+            launch.start()
+            self.lsdslamProcess = launch.launch(node)
+            # Reconfigure lsd_slam_core
+            dynConfLSDSLAM = dynamic_reconfigure.client.Client('lsd_slam_core_ardrone')
             params = { 'minUseGrad' : 15, 'cameraPixelNoise' : 30 }
-            config = client.update_configuration(params)
-
+            config = dynConfLSDSLAM.update_configuration(params)
             client = dynamic_reconfigure.client.Client('lsd_slam_core_ardrone')
-            rospy.set_param('minUseGrad',15)
-            rospy.set_param('cameraPixelNoise',30)
+            # Launch pointcloudregistration
+            node = roslaunch.core.Node('pointcloudregistration','registrar','registrar','','','image:=/ardrone/front/image_rect')
+            launch = roslaunch.scriptapi.ROSLaunch()
+            launch.start()
+            self.detectionProcess = launch.launch(node)
+
             self.detectionStatus=1
             self.log('Detection node is started')
         else:
-            self.pointcloudregistrationProcess.stop()
+            self.detectionProcess.stop()
+            self.lsdslamProcess.stop()
+            self.imageRectifyProcess.stop()
             self.detectionStatus=0
             self.log('Detection node is shut down')
 
@@ -150,4 +161,9 @@ class staircaseAI:
         if self.rvizStatus==1:
             self.rvizProcess.stop()
             self.staticTfProcess.stop()
+        if self.detectionStatus==1:
+            self.detectionProcess.stop()
+            self.lsdslamProcess.stop()
+            self.imageRectifyProcess.stop()
+
         rospy.loginfo("AI Controller is destroyed")
