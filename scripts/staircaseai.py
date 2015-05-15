@@ -57,6 +57,7 @@ class staircaseAI:
         stopBtn     = tk.Button(self.window,text="Stop",command=self.stopAI)
         # Define buttons (RIGHT)
         detectionBtn= tk.Button(self.window,text="Launch detection",command=self.launchPointcloudregistration)
+        ardroneDriverBtn= tk.Button(self.window,text="Launch driver",command=self.launchArdroneDriver)
         self.rvizBtnText = tk.StringVar(); self.rvizBtnText.set("Launch RVIZ")
         rvizBtn   = tk.Button(self.window,textvariable=self.rvizBtnText,command=self.launchRVIZ)
         updateClusterBtn   = tk.Button(self.window,text="Update Cluster",command=self.cluster.update)
@@ -72,7 +73,8 @@ class staircaseAI:
         
 
         titleRightUp.grid(row=0,column=3,columnspan=3,sticky=tk.N+tk.E+tk.S+tk.W)
-        detectionBtn.grid(row=1,column=3,columnspan=3,sticky=tk.N+tk.E+tk.S+tk.W)
+        detectionBtn.grid(row=1,column=3,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
+        ardroneDriverBtn.grid(row=1,column=5,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
         rvizBtn.grid(row=2,column=3,columnspan=3,sticky=tk.N+tk.E+tk.S+tk.W)
         updateClusterBtn.grid(row=3,column=3,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
         resetClusterBtn.grid(row=3,column=5,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
@@ -151,6 +153,30 @@ class staircaseAI:
             self.imageRectifyProcess.stop()
             self.detectionStatus=0
             self.log('Detection node is shut down')
+
+    def launchArdroneDriver(self):
+        # Launch lsd_slam_core
+        node = roslaunch.core.Node('ardrone_autonomy','ardrone_driver','ardrone_driver','','','-ip 192.168.2.165')
+        launch = roslaunch.scriptapi.ROSLaunch()
+        launch.start()
+        self.ardroneDriverProcess = launch.launch(node)
+        dynConfArdroneDriver = dynamic_reconfigure.client.Client('ardrone_driver')
+        params = { 'navdata_demo' : False, 'realtime_navdata' : True, 'realtime_video' : True, 'looprate' : 30, 'altitude_max' : 10000 }
+        config = dynConfArdroneDriver.update_configuration(params)
+        client = dynamic_reconfigure.client.Client('ardrone_driver')
+        # Launch tum_ardrone
+        node = roslaunch.core.Node('tum_ardrone','drone_stateestimation','drone_stateestimation_ardrone')
+        launch = roslaunch.scriptapi.ROSLaunch()
+        launch.start()
+        self.droneStateestimationProcess = launch.launch(node)
+        node = roslaunch.core.Node('tum_ardrone','drone_autopilot','drone_autopilot_ardrone')
+        launch = roslaunch.scriptapi.ROSLaunch()
+        launch.start()
+        self.droneAutopilotProcess = launch.launch(node)
+        node = roslaunch.core.Node('tum_ardrone','drone_gui','drone_gui_ardrone')
+        launch = roslaunch.scriptapi.ROSLaunch()
+        launch.start()
+        self.droneGuiProcess = launch.launch(node)
 
     def stopAI(self):
         command = 'c stop'
