@@ -6,6 +6,7 @@ from threading import Thread
 import dynamic_reconfigure.client
 from clusterNode import *
 from basicdronecontroller import droneStatus
+from lsd_slam_core.srv import *
 
 class staircaseAI:
     ID = "AI"
@@ -326,10 +327,16 @@ class staircaseAI:
         self.log('PTAM is resetted')
 
     def resetLSDSLAM(self):
-        self.log('Not yet implemented')
+        rospy.wait_for_service('resetlsd')
+        try:
+            serviceCall = rospy.ServiceProxy('resetlsd', ResetLSD)
+            response = serviceCall(True)
+        except rospy.ServiceException, e:
+            print "Service call failed: %s"%e
+        self.log('LSD-SLAM is resetted')
 
     def initLSDSLAM(self):
-        self.log('Not yet implemented')
+	self.resetLSDSLAM()
 
     def initializeAI(self):
         self.log('Initializing AI')

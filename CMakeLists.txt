@@ -15,8 +15,6 @@ include_directories(
 
 install(PROGRAMS 
 	scripts/ardrone_gui_controller.py
-	scripts/target_marker.py
-	scripts/point_publisher.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
