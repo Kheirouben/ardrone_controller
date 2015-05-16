@@ -200,7 +200,7 @@ class staircaseAI:
         """Launch pointcloudregistration with all its related nodes: Static TF transform, Image Rectifier and LSD_SLAM"""
         if self.detectionNodeStatus==0:
             # Launch Static TF transform
-            node = roslaunch.core.Node('tf','static_transform_publisher','tf_cam_to_base_ardrone','','','0.210 0 0.0 -0.5 0.5 -0.5 0.5 tum_base_link tum_base_frontcam 100')
+            node = roslaunch.core.Node('tf','static_transform_publisher','tf_cam_to_base_ardrone','','','0.210 0 0.0 -0.5 0.5 -0.5 0.5 tum_base_link tum_base_frontcam 10')
             self.staticTfProcess = self.launcher.launch(node)
             # Launch image rectifier node
             node = roslaunch.core.Node('image_proc','image_proc','image_proc_ardrone','/ardrone/front')
@@ -216,7 +216,7 @@ class staircaseAI:
             config = dynConfLSDSLAM.update_configuration(params)
             client = dynamic_reconfigure.client.Client('lsd_slam_core_ardrone')
             # Launch pointcloudregistration
-            node = roslaunch.core.Node('pointcloudregistration','registrar','registrar','','','image:=/ardrone/front/image_rect')
+            node = roslaunch.core.Node('pointcloudregistration','registrar','pointcloudregistration','','','image:=/ardrone/front/image_rect')
             self.detectionProcess = self.launcher.launch(node)
 
             self.detectionNodeStatus=1
@@ -345,6 +345,7 @@ class staircaseAI:
         else:
             self.log('Sending commands to the drone')
             commands = []
+            #commands.append('c clearCommands')
             commands.append('f reset')
             commands.append('c autoInit 1000 800 4000 0.3')
             commands.append('c setReference $POSE$')
@@ -354,6 +355,10 @@ class staircaseAI:
             commands.append('c lockScaleFP')
             commands.append('c goto 0 0 0 0')
             commands.append('c start')
+            #commands.append('c goto 0 0 0.5 0')
+            #commands.append('c goto 0 0 0 0')
+            #commands.append('c goto 0 0 0.5 0')
+            
             # Publish commands
             for i in range(0,len(commands)):
                 self.tumComPublisher.publish(commands[i])

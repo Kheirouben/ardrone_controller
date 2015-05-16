@@ -116,7 +116,7 @@ class clusterNode:
         self.log = LOG
         # Create markers
         self.targetMarkers = markerArrayRVIZ(self.maxAmountOfPoints,0.1,[1,0,0],'/map',detectionPUB)
-        self.goalMarker = markerArrayRVIZ(1,0.5,[0,1,0],'/map',goalPUB)
+        self.goalMarker = markerArrayRVIZ(1,0.15,[0,1,0],'/map',goalPUB)
         self.log('ClusterNode initialized: listening to detection output')
         
     def reset(self):
@@ -135,6 +135,7 @@ class clusterNode:
     def processPoints(self,pointStamped):
         """Process incoming points. Project to '/map' coordinates and puts them into an array"""
         #pointStamped.header.stamp = rospy.Time()
+        rospy.sleep(1.)
         nP = self.tf_listener.transformPoint('/map',pointStamped) # new Point
         self.pointArray.append(Point([nP.point.x,nP.point.y,nP.point.z]))
         self.targetMarkers.addMarker([nP.point.x,nP.point.y,nP.point.z])
