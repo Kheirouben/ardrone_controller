@@ -98,7 +98,7 @@ class Cluster:
 
 # -- Return a distance matrix which captures distances between all Clusters
 class clusterNode:
-    def __init__(self,LOG,detectionPUB,goalPUB,linkage,agglo_cutoff):
+    def __init__(self,targetLABEL,LOG,detectionPUB,goalPUB,linkage,agglo_cutoff,AMOUNTOFPOINTS):
         """Initialize point clustering class"""
         # Initialize agglomerative clustering parameters
         self.linkage = linkage
@@ -106,9 +106,10 @@ class clusterNode:
         self.verbosity = 1
         # Initialize variables
         self.pointArray = []
-        self.maxAmountOfPoints = 20 # maximum amount of points in the array
+        self.maxAmountOfPoints = AMOUNTOFPOINTS # maximum amount of points in the array
         self.targetLocked = 0
         self.targetPoint = []
+        self.targetLabel = targetLABEL
         # Initialize rosnode
         self.tf_listener = tf.TransformListener()
 
@@ -122,11 +123,13 @@ class clusterNode:
         self.targetPoint = []
         self.pointArray = []
         self.targetLocked = 0
+        self.targetLabel.set('NO')
         self.log('ClusterNode will be reset with the next detected point')
 
     def update(self):
         self.targetPoint = []
         self.targetLocked = 0
+        self.targetLabel.set('NO')
         self.log('ClusterNode will be updated with the next detected point')
 
     def processPoints(self,pointStamped):
@@ -145,6 +148,7 @@ class clusterNode:
                 self.targetLocked = 1
                 message = 'Agglomerative clustering produced goal:'+str(self.targetPoint)
                 self.log(str(message))
+                self.targetLabel.set('YES')
                 print '\nTarget set to ', self.targetPoint,'\n'
 
     # -- Returns the central position of the biggest Cluster (agglomerative clustering)
