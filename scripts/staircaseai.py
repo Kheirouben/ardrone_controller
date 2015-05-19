@@ -199,9 +199,6 @@ class staircaseAI:
     def launchDetectionNode(self):
         """Launch pointcloudregistration with all its related nodes: Static TF transform, Image Rectifier and LSD_SLAM"""
         if self.detectionNodeStatus==0:
-            # Launch Static TF transform
-            node = roslaunch.core.Node('tf','static_transform_publisher','tf_cam_to_base_ardrone','','','0.210 0 0.0 -0.5 0.5 -0.5 0.5 tum_base_link tum_base_frontcam 10')
-            self.staticTfProcess = self.launcher.launch(node)
             # Launch image rectifier node
             node = roslaunch.core.Node('image_proc','image_proc','image_proc_ardrone','/ardrone/front')
             self.imageRectifyProcess = self.launcher.launch(node)
@@ -224,7 +221,7 @@ class staircaseAI:
             self.detectionProcess.stop()
             self.lsdslamProcess.stop()
             self.imageRectifyProcess.stop()
-            self.staticTfProcess.stop()
+            
             self.detectionNodeStatus=0
             self.detectionNodeLbl.configure(fg='red',text='OFF')
             self.log('Detection node is shut down')
@@ -252,7 +249,11 @@ class staircaseAI:
             self.droneGuiProcess = self.launcher.launch(node)
             self.tumArdroneLbl.configure(fg='blue',text='ON')
             self.tumArdroneStatus=1
+            # Launch Static TF transform
+            node = roslaunch.core.Node('tf','static_transform_publisher','tf_cam_to_base_ardrone','','','0.210 0 0.0 -0.5 0.5 -0.5 0.5 tum_base_link tum_base_frontcam 10')
+            self.staticTfProcess = self.launcher.launch(node)
         else:
+            self.staticTfProcess.stop()
             self.droneStateestimationProcess.stop()
             self.droneAutopilotProcess.stop()
             self.droneGuiProcess.stop()
@@ -302,7 +303,7 @@ class staircaseAI:
         if len(self.cluster.targetPoint)!=0:
             commands = []
             commands.append('c clearCommands')
-            commands.append('c goto %f %f %f 0' % (self.cluster.targetPoint[0],self.cluster.targetPoint[1],self.cluster.targetPoint[2]+0.5))
+            commands.append('c goto %f %f %f 0' % (self.cluster.targetPoint[0],self.cluster.targetPoint[1],self.cluster.targetPoint[2]))
             # Publish commands
             for i in range(0,len(commands)):
                 self.tumComPublisher.publish(commands[i])
@@ -361,14 +362,14 @@ class staircaseAI:
             commands.append('c stop')
             commands.append('c clearCommands')
             commands.append('f reset')
-            commands.append('c autoInit 1000 800 2000 0.3')
+            commands.append('c autoInit 1000 800 1000 0.3')
             commands.append('c setReference $POSE$')
             #commands.append('c setReference 0 0 0 0')
             commands.append('c setInitialReachDist 0.2')
             commands.append('c setStayWithinDist 0.3')
             commands.append('c setStayTime 3')
-            commands.append('c lockScaleFP')
-            commands.append('c goto 0 0 1 0')
+            #commands.append('c lockScaleFP')
+            commands.append('c goto 0 0 0.5 0')
             commands.append('c goto 0 0 0 0')
             commands.append('c start')
             
@@ -393,11 +394,12 @@ class staircaseAI:
             self.detectionProcess.stop()
             self.lsdslamProcess.stop()
             self.imageRectifyProcess.stop()
-            self.staticTfProcess.stop()
+            
         if self.tumArdroneStatus==1:
             self.droneStateestimationProcess.stop()
             self.droneAutopilotProcess.stop()
             self.droneGuiProcess.stop()
+            self.staticTfProcess.stop()
         if self.ardroneDriverStatus==1:
             self.ardroneDriverProcess.stop()
         if self.LSDSLAMViewerStatus==1:
