@@ -24,7 +24,7 @@ class gamepadController:
     scaleZ          = 1.0
 
     
-    def __init__(self, master, CONTROLLER):
+    def __init__(self, CONTROLLER):
     	self.ID = "Gamepad"
         self.window = tk.Toplevel()
         self.window.title("Gamepad Controller")
@@ -34,7 +34,7 @@ class gamepadController:
         
         self.controller = CONTROLLER
 
-        photo = tk.PhotoImage(file=self.controller.PATH+"/media/gamepad.gif")
+        photo = tk.PhotoImage(file=self.controller.PATH+"/media/gamepad2.gif")
         pictureLabel = tk.Label(self.window, image=photo)
         pictureLabel.photo = photo
         pictureLabel.pack()
@@ -82,7 +82,7 @@ class gamepadController:
             self.controller.setCommand(data.axes[self.axisRoll]/self.scaleRoll,data.axes[self.axisPitch]/self.scalePitch,data.axes[self.axisYaw]/self.scaleYaw,data.axes[self.axisZ]/self.scaleZ, self.ID)
     
     def close(self):
-        print "Shutting down the joy_node"
+        rospy.loginfo("Gamepad Controller is destroyed")
         try:
             self.process.stop()
         except AttributeError:

@@ -7,6 +7,7 @@ import dynamic_reconfigure.client
 from clusterNode import *
 from basicdronecontroller import droneStatus
 from lsd_slam_core.srv import *
+from settingviewer import *
 
 class staircaseAI:
     ID = "AI"
@@ -18,7 +19,7 @@ class staircaseAI:
     LSDSLAMViewerStatus = 0
     rqtImageViewerStatus = 0
     
-    def __init__(self, master, CONTROLLER):
+    def __init__(self, CONTROLLER):
         """Initialize the AI class"""
 
         # GUI STUFF
@@ -28,21 +29,21 @@ class staircaseAI:
         self.window.tk.call('wm', 'iconphoto', self.window._w, img)
         self.window.protocol("WM_DELETE_WINDOW", self.close)
         # windowsize
-        windowWidth = 1130
-        windowHeight = windowWidth/(1+math.sqrt(5))*2
-        self.window.geometry("%dx%d%+d%+d" % (windowWidth, windowHeight, 550, 125)) # width, height, x-offset, y-offset
+        #windowWidth = 1130
+        #windowHeight = windowWidth/(1+math.sqrt(5))*2
+        #self.window.geometry("%dx%d%+d%+d" % (windowWidth, windowHeight, 550, 125)) # width, height, x-offset, y-offset
         # Grid size = 6x6 --> Unit size:
-        uW=int(windowWidth/26)
-        uH=int(windowHeight/200)
+        #uW=int(windowWidth/26)
+        #uH=int(windowHeight/200)
         
         # Define log widget
         self.logText = tk.Text(self.window)
         self.logText.focus_set()
-        self.logText.config(height=int(windowHeight/30))
+        self.logText.config(height=10)
         # Define detection widget
         self.detectionText = tk.Text(self.window)
         self.detectionText.focus_set()
-        self.detectionText.config(height=int(windowHeight/30))
+        self.detectionText.config(height=10)
         # Early definition of target label indicator --> pass on to cluster
         self.targetLockedText = tk.StringVar()
 
@@ -53,37 +54,37 @@ class staircaseAI:
         self.detectionMarkerPublisher = rospy.Publisher('staircase_detectionmarker_visualization', MarkerArray, queue_size=10)
         self.goalMarkerPublisher = rospy.Publisher('staircase_goalmarker_visualization', MarkerArray, queue_size=10)
         self.tumComPublisher = rospy.Publisher('/tum_ardrone/com', String, queue_size=10)
-        self.cluster = clusterNode(self.targetLockedText, self.logDet,self.detectionMarkerPublisher, self.goalMarkerPublisher,'t',2.0,10)
+        self.cluster = clusterNode(self.targetLockedText, self.logDet,self.detectionMarkerPublisher, self.goalMarkerPublisher,'t',1.0,10)
         self.targetSub = rospy.Subscriber('/pointcloudregistration/target', PointStamped, self.cluster.processPoints, queue_size=10)
 
         # Other GUI STUFF
         # Define titles
-        titleTopLeft = tk.Label(self.window, text="AI Controller", font=("Helvetica", 18))
-        titleTopCenter = tk.Label(self.window, text="Toggle ON/OFF", font=("Helvetica", 18))
-        titleTopRight = tk.Label(self.window, text="Status", font=("Helvetica", 18))
-        titleCenterLeft = tk.Label(self.window, text="Staircase Guidance", font=("Helvetica", 18))
-        titleBottomLeft = tk.Label(self.window, text="Detection", font=("Helvetica", 18))
-        titleBottomRight = tk.Label(self.window, text="Log", font=("Helvetica", 18))
+        titleTopLeft = tk.Label(self.window, text="AI Controller", font=("Helvetica", 16))
+        titleTopCenter = tk.Label(self.window, text="Toggle ON/OFF", font=("Helvetica", 16))
+        titleTopRight = tk.Label(self.window, text="Status", font=("Helvetica", 16))
+        titleCenterLeft = tk.Label(self.window, text="Staircase Guidance", font=("Helvetica", 16))
+        titleBottomLeft = tk.Label(self.window, text="Detection", font=("Helvetica", 16))
+        titleBottomRight = tk.Label(self.window, text="Log", font=("Helvetica", 16))
 
         # Define buttons (LEFT)
+        settingsBtn = tk.Button(self.window,text='Settings',command=self.viewSettings)
         initBtn     = tk.Button(self.window,text="Initialize",command=self.initializeAI)
+        stopBtn     = tk.Button(self.window,text="Stop",command=self.stopAI)
+        
         resetEKFBtn = tk.Button(self.window,text="Reset EKF",command=self.resetEKF)
         resetPTAMBtn = tk.Button(self.window,text="Reset PTAM",command=self.resetPTAM)
-        gotoOriginBtn = tk.Button(self.window,text="Goto Origin",command=self.gotoOrigin)
-        
-        self.commandEntryText = tk.StringVar()
-        commandEntry = tk.Entry(self.window,textvariable=self.commandEntryText)
-        sendCommandBtn = tk.Button(self.window,text="Send Command",command=self.sendCommand)
-        
+        initLSDSLAMBtn = tk.Button(self.window,text="Re-init LSD-SLAM",command=self.initLSDSLAM)
+
         takeoffBtn = tk.Button(self.window,text="Takeoff",command= lambda: self.controller.sendtakeoff(self.ID))
         landBtn = tk.Button(self.window,text="Land",command= lambda: self.controller.sendLand(self.ID))
         emergencyBtn = tk.Button(self.window,text="Emergency",command= lambda: self.controller.sendEmergency(self.ID))
-        resetLSDSLAMBtn = tk.Button(self.window,text="Reset LSD-SLAM",command=self.resetLSDSLAM)
-        initLSDSLAMBtn = tk.Button(self.window,text="Init LSD-SLAM",command=self.initLSDSLAM)
+
+        self.commandEntryText = tk.StringVar()
+        commandEntry = tk.Entry(self.window,textvariable=self.commandEntryText)
+        self.commandEntryText.set('tum_ardrone command. e.g. "c goto 0 0 0 0"')
+        sendCommandBtn = tk.Button(self.window,text="Send Command",command=self.sendCommand)        
 
         goBtn       = tk.Button(self.window,text="Go",command=self.goAI)
-        #returnBtn   = tk.Button(self.window,text="Return",command=self.close)
-        stopBtn     = tk.Button(self.window,text="Stop",command=self.stopAI)
         updateClusterBtn   = tk.Button(self.window,text="Update Cluster",command=self.cluster.update)
         resetClusterBtn = tk.Button(self.window,text="Reset Cluster",command=self.cluster.reset)
 
@@ -117,26 +118,26 @@ class staircaseAI:
         titleBottomLeft.grid(row=8,column=0,columnspan=3,sticky=tk.N+tk.E+tk.S+tk.W)
         titleBottomRight.grid(row=8,column=3,columnspan=2,sticky=tk.N+tk.E+tk.S+tk.W)
 
-        initBtn.grid(row=1,column=0,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
-        resetEKFBtn.grid(row=1,column=1,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
-        resetPTAMBtn.grid(row=1,column=2,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
-        gotoOriginBtn.grid(row=2,column=2,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
+        settingsBtn.grid(row=1,column=0,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
+        initBtn.grid(row=1,column=1,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
+        stopBtn.grid(row=1,column=2,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
+
+        resetEKFBtn.grid(row=2,column=0,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
+        resetPTAMBtn.grid(row=2,column=1,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
+        initLSDSLAMBtn.grid(row=2,column=2,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
+
+        takeoffBtn.grid(row=3,column=0,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
+        landBtn.grid(row=3,column=1,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
+        emergencyBtn.grid(row=3,column=2,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
         
-        commandEntry.grid(row=3,column=0,columnspan=2,sticky=tk.N+tk.E+tk.S+tk.W)
-        sendCommandBtn.grid(row=3,column=2,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
-        
-        takeoffBtn.grid(row=4,column=0,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
-        landBtn.grid(row=4,column=1,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
-        emergencyBtn.grid(row=4,column=2,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
-        resetLSDSLAMBtn.grid(row=2,column=0,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
-        initLSDSLAMBtn.grid(row=2,column=1,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
+        commandEntry.grid(row=4,column=0,columnspan=2,sticky=tk.N+tk.E+tk.S+tk.W)
+        sendCommandBtn.grid(row=4,column=2,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
 
         goBtn.grid(row=6,column=0,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
-        stopBtn.grid(row=6,column=1,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
-        updateClusterBtn.grid(row=7,column=0,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
-        resetClusterBtn.grid(row=7,column=1,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
+        updateClusterBtn.grid(row=6,column=0,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
+        resetClusterBtn.grid(row=6,column=1,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
 
-        self.detectionText.grid(row=9,column=0,rowspan=2,columnspan=3,sticky=tk.N+tk.E+tk.S+tk.W)
+        self.detectionText.grid(row=9,column=0,rowspan=1,columnspan=3,sticky=tk.N+tk.E+tk.S+tk.W)
 
         ardroneDriverBtn.grid(row=1,column=3,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
         self.ardroneDriverLbl.grid(row=1,column=4,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
@@ -159,7 +160,7 @@ class staircaseAI:
         targetLockedStaticLbl.grid(row=7,column=3,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
         targetLockedLbl.grid(row=7,column=4,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
 
-        self.logText.grid(row=9,column=3,rowspan=2,columnspan=2,sticky=tk.N+tk.E+tk.S+tk.W)
+        self.logText.grid(row=9,column=3,rowspan=1,columnspan=2,sticky=tk.N+tk.E+tk.S+tk.W)
 
 
         self.launcher = roslaunch.scriptapi.ROSLaunch()
@@ -289,11 +290,6 @@ class staircaseAI:
         self.tumComPublisher.publish(command)
         self.log('The command: '+command+' is sent to the drone')
 
-    def gotoOrigin(self):
-        command = 'c goto 0 0 0 0'
-        self.tumComPublisher.publish(command)
-        self.log('Drone is sent to (0,0,0,0)')
-
     def stopAI(self):
         command = 'c stop'
         self.tumComPublisher.publish(command)
@@ -356,6 +352,8 @@ class staircaseAI:
         self.log('Initializing AI')
         if self.controller.status == droneStatus.Flying or self.controller.status == droneStatus.GotoHover or self.controller.status == droneStatus.Hovering:
             self.log('Drone is already in the air')
+        elif self.controller.status == droneStatus.Emergency:
+            self.log('Drone is in emergency status. Please click the emergency button.')
         else:
             self.log('Sending commands to the drone')
             commands = []
@@ -380,6 +378,9 @@ class staircaseAI:
     def takeoff(self):
         self.takeoffPublisher.publish(Empty)
     
+    def viewSettings(self):
+        self.settingsApp = settingViewer(self.controller)
+
 
     def close(self):
         """Close the AI GUI interface"""
