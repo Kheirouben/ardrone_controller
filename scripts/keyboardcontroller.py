@@ -1,7 +1,6 @@
 import Tkinter as tk
 
-#from basicdronecontroller import *
-from ardrone_gui_controller import *
+#from ardrone_gui_controller import *
 
 class keyMapping(object):
     pitchForward     = "e"
@@ -19,13 +18,13 @@ class keyMapping(object):
 
 
 class keyboardController:
-    aggresivness = 1
+    agressiveness = 1
     pitch = 0
     roll = 0
     yaw_velocity = 0 
     z_velocity = 0
     counter = 0
-    def __init__(self, master, CONTROLLER):
+    def __init__(self, CONTROLLER):
         self.ID = "Keyboard"
         self.window = tk.Toplevel()
         self.window.title("Keyboard Controller")
@@ -48,6 +47,7 @@ class keyboardController:
         self.controller.setCommand(self.roll, self.pitch, self.yaw_velocity, self.z_velocity,self.ID)
 
     def key(self,event):
+        print 'key pressed'
         key = event.char
         if key != '':
             #self.counter = 0
@@ -59,21 +59,21 @@ class keyboardController:
                 self.controller.sendEmergency(self.ID)
             else:
                 if key == keyMapping.pitchForward:
-                    self.pitch += 1*self.aggresivness
+                    self.pitch += 1*self.agressiveness
                 elif key == keyMapping.pitchBackward:
-                    self.pitch += -1*self.aggresivness
+                    self.pitch += -1*self.agressiveness
                 elif key == keyMapping.rollLeft:
-                    self.roll += 1*self.aggresivness
+                    self.roll += 1*self.agressiveness
                 elif key == keyMapping.rollRight:
-                    self.roll += -1*self.aggresivness
+                    self.roll += -1*self.agressiveness
                 elif key == keyMapping.yawLeft:
-                    self.yaw_velocity += 1*self.aggresivness
+                    self.yaw_velocity += 1*self.agressiveness
                 elif key == keyMapping.yawRight:
-                    self.yaw_velocity += -1*self.aggresivness
+                    self.yaw_velocity += -1*self.agressiveness
                 elif key == keyMapping.increaseAltitude:
-                    self.z_velocity += 1*self.aggresivness
+                    self.z_velocity += 1*self.agressiveness
                 elif key == keyMapping.decreaseAltitude:
-                    self.z_velocity += -1*self.aggresivness
+                    self.z_velocity += -1*self.agressiveness
                 elif key == keyMapping.exit:
                     rospy.signal_shutdown('Great Flying!')
                     sys.exit(1)
