@@ -1,21 +1,156 @@
 \hypertarget{classstaircaseai_1_1staircaseAI}{\section{staircaseai.\-staircase\-A\-I Class Reference}
 \label{classstaircaseai_1_1staircaseAI}\index{staircaseai.\-staircase\-A\-I@{staircaseai.\-staircase\-A\-I}}
 }
+
+
+Collaboration diagram for staircaseai.\-staircase\-A\-I\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=263pt]{classstaircaseai_1_1staircaseAI__coll__graph}
+\end{center}
+\end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 def \hyperlink{classstaircaseai_1_1staircaseAI_a959826fb3658b9e4080fdad1af3db9e0}{\-\_\-\-\_\-init\-\_\-\-\_\-}
-\item 
+\begin{DoxyCompactList}\small\item\em Initialize the A\-I class. \end{DoxyCompactList}\item 
 def \hyperlink{classstaircaseai_1_1staircaseAI_a4ff981aeb976bec76974ff49782cc84b}{log}
-\item 
+\begin{DoxyCompactList}\small\item\em Puts text in the logscreen of the A\-I G\-U\-I. \end{DoxyCompactList}\item 
+def \hyperlink{classstaircaseai_1_1staircaseAI_a53c80e974fec7df7ce206eeff7e44d26}{log\-Det}
+\begin{DoxyCompactList}\small\item\em Puts text in the logscreen of the A\-I G\-U\-I. \end{DoxyCompactList}\item 
 def \hyperlink{classstaircaseai_1_1staircaseAI_a7170e090765a0c5664664108e3f38ea1}{launch\-R\-V\-I\-Z}
+\begin{DoxyCompactList}\small\item\em Launch rviz with the custom setup that is used in ardrone\-\_\-controller together with launch\-Static\-Tf() \end{DoxyCompactList}\item 
+def \hyperlink{classstaircaseai_1_1staircaseAI_a0b234cbac093233518729fa5ea0ad725}{launch\-Detection\-Node}
+\begin{DoxyCompactList}\small\item\em Launch pointcloudregistration with all its related nodes\-: Static T\-F transform, Image Rectifier and L\-S\-D\-\_\-\-S\-L\-A\-M. \end{DoxyCompactList}\item 
+def \hyperlink{classstaircaseai_1_1staircaseAI_a5274e2c215ae921ba6f299639215588b}{launch\-Ardrone\-Driver}
 \item 
-def \hyperlink{classstaircaseai_1_1staircaseAI_a50cb883838b49c92caa027882dff627a}{launch\-Static\-Tf}
+def \hyperlink{classstaircaseai_1_1staircaseAI_ad6c9232a0f6421ddbedf68b45bda1fe6}{launch\-Tum\-Ardrone}
 \item 
-def \hyperlink{classstaircaseai_1_1staircaseAI_adf5741919aa34d689f39b8b38f70f1b0}{launch\-Pointcloudregistration}
+def \hyperlink{classstaircaseai_1_1staircaseAI_acef3807e16c5df0f1d4723c33785f72e}{launch\-L\-S\-D\-S\-L\-A\-M\-Viewer}
+\item 
+def \hyperlink{classstaircaseai_1_1staircaseAI_a72d9ae05f9b3a8ac4b937e284164d5c5}{launchrqt\-Image\-Viewer}
+\item 
+def \hyperlink{classstaircaseai_1_1staircaseAI_a0e7b18b6a8d981ee6156ac1d3bc05485}{send\-Command}
+\item 
+def \hyperlink{classstaircaseai_1_1staircaseAI_a7321e77bc12492d99fb34ff729fb29c2}{goto\-Origin}
+\item 
+def \hyperlink{classstaircaseai_1_1staircaseAI_adf368404f5be7a0f97a858d620000456}{stop\-A\-I}
+\item 
+def \hyperlink{classstaircaseai_1_1staircaseAI_a1a4d524a29a3fbe6151151b42beede65}{go\-A\-I}
+\item 
+def \hyperlink{classstaircaseai_1_1staircaseAI_a4a69816800ed71ce87bd49427e5106e5}{reset\-E\-K\-F}
+\item 
+def \hyperlink{classstaircaseai_1_1staircaseAI_a0018cc957508941977beb292aa38e660}{reset\-P\-T\-A\-M}
+\item 
+def \hyperlink{classstaircaseai_1_1staircaseAI_a4c6f190b346d73401b6a93e1f6018565}{reset\-L\-S\-D\-S\-L\-A\-M}
+\item 
+def \hyperlink{classstaircaseai_1_1staircaseAI_aab2dc561edc8cb7b6575ce6a82fa19d4}{init\-L\-S\-D\-S\-L\-A\-M}
+\item 
+def \hyperlink{classstaircaseai_1_1staircaseAI_ad23031b5507a48abfbfea19671cf73ca}{initialize\-A\-I}
+\item 
+def \hyperlink{classstaircaseai_1_1staircaseAI_a0d82ca122f05000e0192e5f6e4810e43}{takeoff}
 \item 
 def \hyperlink{classstaircaseai_1_1staircaseAI_ace7a55f711f5fb559531fe5f6a1ea61f}{close}
+\begin{DoxyCompactList}\small\item\em Close the A\-I G\-U\-I interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_a95e3078cae642f3569ea7ea043cddc3f}{window}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_a4fe728ac07ff17300ede98396d4516dc}{log\-Text}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_a69f3626f7e9a387ecf066fc874fb9b15}{detection\-Text}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_a1f55704fa569f33c5cabd6e89c549dc6}{target\-Locked\-Text}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_aae321ff5a9a1cffe907c562ba4c6b39f}{controller}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_a94eefb2cb8d38235945f714fe35b2e5b}{detection\-Marker\-Publisher}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_ae21365d23660c43e89c13ef633c7fe65}{goal\-Marker\-Publisher}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_a84126efb40c0a7d59dff2b930ec0a63c}{tum\-Com\-Publisher}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_ad4b23f2ca76299504bf0ed5492293b10}{cluster}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_aa94cc788015f2cf55e5e0755b95341fe}{target\-Sub}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_a2c20eaa6e814025adfe71f11737dd0cf}{command\-Entry\-Text}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_abe6ce43882cbd5e478493177450c9023}{ardrone\-Driver\-Lbl}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_a6b07562110670bd39dfaa76c3d289f4c}{tum\-Ardrone\-Lbl}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_ab2a668e0ee4a8c8eed4982275a34b9f8}{detection\-Node\-Lbl}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_ae050ef3b610f1f90003f74c89c6562c2}{R\-V\-I\-Z\-Lbl}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_a027e1496f0f3ecf7be88e2d3986f5bd2}{L\-S\-D\-S\-L\-A\-M\-Viewer\-Lbl}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_a40b886c5b0bd0895901671e0bdc1a006}{rqt\-Image\-Viewer\-Lbl}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_a833c982cff34fb60a0fb6f66f80efb25}{launcher}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_ac9966f9d12d8d3e73f0c5ac6891243c6}{R\-V\-I\-Z\-Status}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_a54bcc18605f2331eeb8d42a0709b3590}{R\-V\-I\-Z\-Process}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_ad3fdf6d0b4f17644da041f09e15b3ca7}{detection\-Node\-Status}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_a01c439ebe7570405bb22f82ba5a0bb3e}{static\-Tf\-Process}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_a77b90c85075237529ae93835fd2af2bd}{image\-Rectify\-Process}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_a5e60775b7acf386fc10cb0ef2f118bc8}{lsdslam\-Process}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_a87462cc129cb86ab0aaef5b8731cba6c}{detection\-Process}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_a2f76e2a18d929a8d80ed7d8090e3884a}{ardrone\-Driver\-Status}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_a1dcc49f394aa217782d18a252c095d91}{ardrone\-Driver\-Process}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_af27dfa875e03ac7646b25a655318e7e6}{tum\-Ardrone\-Status}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_a7e495d7bf55a5c90c7b6c342d93e3f58}{drone\-Stateestimation\-Process}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_a40cdd3e980ae70333a716ceb08dde2bf}{drone\-Autopilot\-Process}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_ac4392e3c93f4aedf23195b659ccef0c1}{drone\-Gui\-Process}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_ae6980c88f11e387fec4f4558e1fd60ec}{L\-S\-D\-S\-L\-A\-M\-Viewer\-Status}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_ac0e22a971bbe5e53dc1e085f7d4053b4}{L\-S\-D\-S\-L\-A\-M\-Viewer\-Process}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_a3bf21dbce86df4212e2a71d8449acfd3}{rqt\-Image\-Viewer\-Status}
+\item 
+\hyperlink{classstaircaseai_1_1staircaseAI_a6d00dba2967e83eb5114c61381a1db29}{rqt\-Image\-Viewer\-Process}
 \end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{classstaircaseai_1_1staircaseAI_a5eacd7c55a1736b84c4d08031c9c8dbc}{I\-D} = \char`\"{}A\-I\char`\"{}
+\item 
+int \hyperlink{classstaircaseai_1_1staircaseAI_a81113025f948e62b7d85719ddd1cc189}{ardrone\-Driver\-Status} = 0
+\item 
+int \hyperlink{classstaircaseai_1_1staircaseAI_a94e2925e1c0eca37cbdbfc7201dabcb6}{tum\-Ardrone\-Status} = 0
+\item 
+int \hyperlink{classstaircaseai_1_1staircaseAI_af1b341a22ebf3a672a1168cb7bed7a18}{detection\-Node\-Status} = 0
+\item 
+int \hyperlink{classstaircaseai_1_1staircaseAI_add2effa5e0e73d315ac2fc563c4370af}{R\-V\-I\-Z\-Status} = 0
+\item 
+int \hyperlink{classstaircaseai_1_1staircaseAI_a0ba4e3d2088a3c69b7afc3cdc40986c4}{L\-S\-D\-S\-L\-A\-M\-Viewer\-Status} = 0
+\item 
+int \hyperlink{classstaircaseai_1_1staircaseAI_a1480f7f7d21ef55eac0d17876b33de1b}{rqt\-Image\-Viewer\-Status} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 11 of file staircaseai.\-py.
+
 
 
 \subsection{Constructor \& Destructor Documentation}
@@ -28,8 +163,15 @@ def \hyperlink{classstaircaseai_1_1staircaseAI_ace7a55f711f5fb559531fe5f6a1ea61f
 \item[{}]{C\-O\-N\-T\-R\-O\-L\-L\-E\-R}
 \end{DoxyParamCaption}
 )}}\label{classstaircaseai_1_1staircaseAI_a959826fb3658b9e4080fdad1af3db9e0}
-\begin{DoxyVerb}Initialize the AI class\end{DoxyVerb}
- 
+
+
+Initialize the A\-I class. 
+
+
+
+Definition at line 23 of file staircaseai.\-py.
+
+
 
 \subsection{Member Function Documentation}
 \hypertarget{classstaircaseai_1_1staircaseAI_ace7a55f711f5fb559531fe5f6a1ea61f}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!close@{close}}
@@ -39,33 +181,133 @@ def \hyperlink{classstaircaseai_1_1staircaseAI_ace7a55f711f5fb559531fe5f6a1ea61f
 \item[{}]{self}
 \end{DoxyParamCaption}
 )}}\label{classstaircaseai_1_1staircaseAI_ace7a55f711f5fb559531fe5f6a1ea61f}
-\begin{DoxyVerb}Close the AI GUI interface\end{DoxyVerb}
- \hypertarget{classstaircaseai_1_1staircaseAI_adf5741919aa34d689f39b8b38f70f1b0}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!launch\-Pointcloudregistration@{launch\-Pointcloudregistration}}
-\index{launch\-Pointcloudregistration@{launch\-Pointcloudregistration}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
-\subsubsection[{launch\-Pointcloudregistration}]{\setlength{\rightskip}{0pt plus 5cm}def staircaseai.\-staircase\-A\-I.\-launch\-Pointcloudregistration (
+
+
+Close the A\-I G\-U\-I interface. 
+
+
+
+Definition at line 377 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a1a4d524a29a3fbe6151151b42beede65}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!go\-A\-I@{go\-A\-I}}
+\index{go\-A\-I@{go\-A\-I}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{go\-A\-I}]{\setlength{\rightskip}{0pt plus 5cm}def staircaseai.\-staircase\-A\-I.\-go\-A\-I (
 \begin{DoxyParamCaption}
 \item[{}]{self}
 \end{DoxyParamCaption}
-)}}\label{classstaircaseai_1_1staircaseAI_adf5741919aa34d689f39b8b38f70f1b0}
-\begin{DoxyVerb}Launch pointcloudregistration with all its dependend nodes: Image Rectifier and LSD_SLAM\end{DoxyVerb}
- \hypertarget{classstaircaseai_1_1staircaseAI_a7170e090765a0c5664664108e3f38ea1}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!launch\-R\-V\-I\-Z@{launch\-R\-V\-I\-Z}}
+)}}\label{classstaircaseai_1_1staircaseAI_a1a4d524a29a3fbe6151151b42beede65}
+
+
+Definition at line 312 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a7321e77bc12492d99fb34ff729fb29c2}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!goto\-Origin@{goto\-Origin}}
+\index{goto\-Origin@{goto\-Origin}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{goto\-Origin}]{\setlength{\rightskip}{0pt plus 5cm}def staircaseai.\-staircase\-A\-I.\-goto\-Origin (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}\label{classstaircaseai_1_1staircaseAI_a7321e77bc12492d99fb34ff729fb29c2}
+
+
+Definition at line 303 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_ad23031b5507a48abfbfea19671cf73ca}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!initialize\-A\-I@{initialize\-A\-I}}
+\index{initialize\-A\-I@{initialize\-A\-I}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{initialize\-A\-I}]{\setlength{\rightskip}{0pt plus 5cm}def staircaseai.\-staircase\-A\-I.\-initialize\-A\-I (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}\label{classstaircaseai_1_1staircaseAI_ad23031b5507a48abfbfea19671cf73ca}
+
+
+Definition at line 346 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_aab2dc561edc8cb7b6575ce6a82fa19d4}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!init\-L\-S\-D\-S\-L\-A\-M@{init\-L\-S\-D\-S\-L\-A\-M}}
+\index{init\-L\-S\-D\-S\-L\-A\-M@{init\-L\-S\-D\-S\-L\-A\-M}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{init\-L\-S\-D\-S\-L\-A\-M}]{\setlength{\rightskip}{0pt plus 5cm}def staircaseai.\-staircase\-A\-I.\-init\-L\-S\-D\-S\-L\-A\-M (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}\label{classstaircaseai_1_1staircaseAI_aab2dc561edc8cb7b6575ce6a82fa19d4}
+
+
+Definition at line 343 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a5274e2c215ae921ba6f299639215588b}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!launch\-Ardrone\-Driver@{launch\-Ardrone\-Driver}}
+\index{launch\-Ardrone\-Driver@{launch\-Ardrone\-Driver}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{launch\-Ardrone\-Driver}]{\setlength{\rightskip}{0pt plus 5cm}def staircaseai.\-staircase\-A\-I.\-launch\-Ardrone\-Driver (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}\label{classstaircaseai_1_1staircaseAI_a5274e2c215ae921ba6f299639215588b}
+
+
+Definition at line 239 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a0b234cbac093233518729fa5ea0ad725}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!launch\-Detection\-Node@{launch\-Detection\-Node}}
+\index{launch\-Detection\-Node@{launch\-Detection\-Node}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{launch\-Detection\-Node}]{\setlength{\rightskip}{0pt plus 5cm}def staircaseai.\-staircase\-A\-I.\-launch\-Detection\-Node (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}\label{classstaircaseai_1_1staircaseAI_a0b234cbac093233518729fa5ea0ad725}
+
+
+Launch pointcloudregistration with all its related nodes\-: Static T\-F transform, Image Rectifier and L\-S\-D\-\_\-\-S\-L\-A\-M. 
+
+
+
+Definition at line 205 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_acef3807e16c5df0f1d4723c33785f72e}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!launch\-L\-S\-D\-S\-L\-A\-M\-Viewer@{launch\-L\-S\-D\-S\-L\-A\-M\-Viewer}}
+\index{launch\-L\-S\-D\-S\-L\-A\-M\-Viewer@{launch\-L\-S\-D\-S\-L\-A\-M\-Viewer}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{launch\-L\-S\-D\-S\-L\-A\-M\-Viewer}]{\setlength{\rightskip}{0pt plus 5cm}def staircaseai.\-staircase\-A\-I.\-launch\-L\-S\-D\-S\-L\-A\-M\-Viewer (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}\label{classstaircaseai_1_1staircaseAI_acef3807e16c5df0f1d4723c33785f72e}
+
+
+Definition at line 274 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a72d9ae05f9b3a8ac4b937e284164d5c5}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!launchrqt\-Image\-Viewer@{launchrqt\-Image\-Viewer}}
+\index{launchrqt\-Image\-Viewer@{launchrqt\-Image\-Viewer}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{launchrqt\-Image\-Viewer}]{\setlength{\rightskip}{0pt plus 5cm}def staircaseai.\-staircase\-A\-I.\-launchrqt\-Image\-Viewer (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}\label{classstaircaseai_1_1staircaseAI_a72d9ae05f9b3a8ac4b937e284164d5c5}
+
+
+Definition at line 286 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a7170e090765a0c5664664108e3f38ea1}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!launch\-R\-V\-I\-Z@{launch\-R\-V\-I\-Z}}
 \index{launch\-R\-V\-I\-Z@{launch\-R\-V\-I\-Z}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
 \subsubsection[{launch\-R\-V\-I\-Z}]{\setlength{\rightskip}{0pt plus 5cm}def staircaseai.\-staircase\-A\-I.\-launch\-R\-V\-I\-Z (
 \begin{DoxyParamCaption}
 \item[{}]{self}
 \end{DoxyParamCaption}
 )}}\label{classstaircaseai_1_1staircaseAI_a7170e090765a0c5664664108e3f38ea1}
-\begin{DoxyVerb}Launch rviz with the custom setup that is used in ardrone_controller together with launchStaticTf()\end{DoxyVerb}
- \hypertarget{classstaircaseai_1_1staircaseAI_a50cb883838b49c92caa027882dff627a}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!launch\-Static\-Tf@{launch\-Static\-Tf}}
-\index{launch\-Static\-Tf@{launch\-Static\-Tf}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
-\subsubsection[{launch\-Static\-Tf}]{\setlength{\rightskip}{0pt plus 5cm}def staircaseai.\-staircase\-A\-I.\-launch\-Static\-Tf (
+
+
+Launch rviz with the custom setup that is used in ardrone\-\_\-controller together with launch\-Static\-Tf() 
+
+
+
+Definition at line 187 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_ad6c9232a0f6421ddbedf68b45bda1fe6}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!launch\-Tum\-Ardrone@{launch\-Tum\-Ardrone}}
+\index{launch\-Tum\-Ardrone@{launch\-Tum\-Ardrone}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{launch\-Tum\-Ardrone}]{\setlength{\rightskip}{0pt plus 5cm}def staircaseai.\-staircase\-A\-I.\-launch\-Tum\-Ardrone (
 \begin{DoxyParamCaption}
-\item[{}]{self, }
-\item[{}]{toggle}
+\item[{}]{self}
 \end{DoxyParamCaption}
-)}}\label{classstaircaseai_1_1staircaseAI_a50cb883838b49c92caa027882dff627a}
-\begin{DoxyVerb}Launch the tf static transform node from the body of the ardrone to the camera axis. If the argument is 0, the static transform is stopped.\end{DoxyVerb}
- \hypertarget{classstaircaseai_1_1staircaseAI_a4ff981aeb976bec76974ff49782cc84b}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!log@{log}}
+)}}\label{classstaircaseai_1_1staircaseAI_ad6c9232a0f6421ddbedf68b45bda1fe6}
+
+
+Definition at line 256 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a4ff981aeb976bec76974ff49782cc84b}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!log@{log}}
 \index{log@{log}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
 \subsubsection[{log}]{\setlength{\rightskip}{0pt plus 5cm}def staircaseai.\-staircase\-A\-I.\-log (
 \begin{DoxyParamCaption}
@@ -73,9 +315,395 @@ def \hyperlink{classstaircaseai_1_1staircaseAI_ace7a55f711f5fb559531fe5f6a1ea61f
 \item[{}]{string}
 \end{DoxyParamCaption}
 )}}\label{classstaircaseai_1_1staircaseAI_a4ff981aeb976bec76974ff49782cc84b}
-\begin{DoxyVerb}Puts text in the logscreen of the AI GUI\end{DoxyVerb}
- 
+
+
+Puts text in the logscreen of the A\-I G\-U\-I. 
+
+
+
+Definition at line 176 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a53c80e974fec7df7ce206eeff7e44d26}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!log\-Det@{log\-Det}}
+\index{log\-Det@{log\-Det}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{log\-Det}]{\setlength{\rightskip}{0pt plus 5cm}def staircaseai.\-staircase\-A\-I.\-log\-Det (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{string}
+\end{DoxyParamCaption}
+)}}\label{classstaircaseai_1_1staircaseAI_a53c80e974fec7df7ce206eeff7e44d26}
+
+
+Puts text in the logscreen of the A\-I G\-U\-I. 
+
+
+
+Definition at line 181 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a4a69816800ed71ce87bd49427e5106e5}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!reset\-E\-K\-F@{reset\-E\-K\-F}}
+\index{reset\-E\-K\-F@{reset\-E\-K\-F}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{reset\-E\-K\-F}]{\setlength{\rightskip}{0pt plus 5cm}def staircaseai.\-staircase\-A\-I.\-reset\-E\-K\-F (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}\label{classstaircaseai_1_1staircaseAI_a4a69816800ed71ce87bd49427e5106e5}
+
+
+Definition at line 322 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a4c6f190b346d73401b6a93e1f6018565}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!reset\-L\-S\-D\-S\-L\-A\-M@{reset\-L\-S\-D\-S\-L\-A\-M}}
+\index{reset\-L\-S\-D\-S\-L\-A\-M@{reset\-L\-S\-D\-S\-L\-A\-M}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{reset\-L\-S\-D\-S\-L\-A\-M}]{\setlength{\rightskip}{0pt plus 5cm}def staircaseai.\-staircase\-A\-I.\-reset\-L\-S\-D\-S\-L\-A\-M (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}\label{classstaircaseai_1_1staircaseAI_a4c6f190b346d73401b6a93e1f6018565}
+
+
+Definition at line 334 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a0018cc957508941977beb292aa38e660}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!reset\-P\-T\-A\-M@{reset\-P\-T\-A\-M}}
+\index{reset\-P\-T\-A\-M@{reset\-P\-T\-A\-M}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{reset\-P\-T\-A\-M}]{\setlength{\rightskip}{0pt plus 5cm}def staircaseai.\-staircase\-A\-I.\-reset\-P\-T\-A\-M (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}\label{classstaircaseai_1_1staircaseAI_a0018cc957508941977beb292aa38e660}
+
+
+Definition at line 329 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a0e7b18b6a8d981ee6156ac1d3bc05485}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!send\-Command@{send\-Command}}
+\index{send\-Command@{send\-Command}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{send\-Command}]{\setlength{\rightskip}{0pt plus 5cm}def staircaseai.\-staircase\-A\-I.\-send\-Command (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}\label{classstaircaseai_1_1staircaseAI_a0e7b18b6a8d981ee6156ac1d3bc05485}
+
+
+Definition at line 298 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_adf368404f5be7a0f97a858d620000456}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!stop\-A\-I@{stop\-A\-I}}
+\index{stop\-A\-I@{stop\-A\-I}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{stop\-A\-I}]{\setlength{\rightskip}{0pt plus 5cm}def staircaseai.\-staircase\-A\-I.\-stop\-A\-I (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}\label{classstaircaseai_1_1staircaseAI_adf368404f5be7a0f97a858d620000456}
+
+
+Definition at line 308 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a0d82ca122f05000e0192e5f6e4810e43}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!takeoff@{takeoff}}
+\index{takeoff@{takeoff}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{takeoff}]{\setlength{\rightskip}{0pt plus 5cm}def staircaseai.\-staircase\-A\-I.\-takeoff (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}\label{classstaircaseai_1_1staircaseAI_a0d82ca122f05000e0192e5f6e4810e43}
+
+
+Definition at line 371 of file staircaseai.\-py.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classstaircaseai_1_1staircaseAI_abe6ce43882cbd5e478493177450c9023}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!ardrone\-Driver\-Lbl@{ardrone\-Driver\-Lbl}}
+\index{ardrone\-Driver\-Lbl@{ardrone\-Driver\-Lbl}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{ardrone\-Driver\-Lbl}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-ardrone\-Driver\-Lbl}}\label{classstaircaseai_1_1staircaseAI_abe6ce43882cbd5e478493177450c9023}
+
+
+Definition at line 93 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a1dcc49f394aa217782d18a252c095d91}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!ardrone\-Driver\-Process@{ardrone\-Driver\-Process}}
+\index{ardrone\-Driver\-Process@{ardrone\-Driver\-Process}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{ardrone\-Driver\-Process}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-ardrone\-Driver\-Process}}\label{classstaircaseai_1_1staircaseAI_a1dcc49f394aa217782d18a252c095d91}
+
+
+Definition at line 248 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a81113025f948e62b7d85719ddd1cc189}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!ardrone\-Driver\-Status@{ardrone\-Driver\-Status}}
+\index{ardrone\-Driver\-Status@{ardrone\-Driver\-Status}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{ardrone\-Driver\-Status}]{\setlength{\rightskip}{0pt plus 5cm}int staircaseai.\-staircase\-A\-I.\-ardrone\-Driver\-Status = 0\hspace{0.3cm}{\ttfamily [static]}}}\label{classstaircaseai_1_1staircaseAI_a81113025f948e62b7d85719ddd1cc189}
+
+
+Definition at line 14 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a2f76e2a18d929a8d80ed7d8090e3884a}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!ardrone\-Driver\-Status@{ardrone\-Driver\-Status}}
+\index{ardrone\-Driver\-Status@{ardrone\-Driver\-Status}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{ardrone\-Driver\-Status}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-ardrone\-Driver\-Status}}\label{classstaircaseai_1_1staircaseAI_a2f76e2a18d929a8d80ed7d8090e3884a}
+
+
+Definition at line 240 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_ad4b23f2ca76299504bf0ed5492293b10}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!cluster@{cluster}}
+\index{cluster@{cluster}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{cluster}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-cluster}}\label{classstaircaseai_1_1staircaseAI_ad4b23f2ca76299504bf0ed5492293b10}
+
+
+Definition at line 57 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a2c20eaa6e814025adfe71f11737dd0cf}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!command\-Entry\-Text@{command\-Entry\-Text}}
+\index{command\-Entry\-Text@{command\-Entry\-Text}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{command\-Entry\-Text}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-command\-Entry\-Text}}\label{classstaircaseai_1_1staircaseAI_a2c20eaa6e814025adfe71f11737dd0cf}
+
+
+Definition at line 75 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_aae321ff5a9a1cffe907c562ba4c6b39f}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!controller@{controller}}
+\index{controller@{controller}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{controller}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-controller}}\label{classstaircaseai_1_1staircaseAI_aae321ff5a9a1cffe907c562ba4c6b39f}
+
+
+Definition at line 51 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a94eefb2cb8d38235945f714fe35b2e5b}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!detection\-Marker\-Publisher@{detection\-Marker\-Publisher}}
+\index{detection\-Marker\-Publisher@{detection\-Marker\-Publisher}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{detection\-Marker\-Publisher}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-detection\-Marker\-Publisher}}\label{classstaircaseai_1_1staircaseAI_a94eefb2cb8d38235945f714fe35b2e5b}
+
+
+Definition at line 54 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_ab2a668e0ee4a8c8eed4982275a34b9f8}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!detection\-Node\-Lbl@{detection\-Node\-Lbl}}
+\index{detection\-Node\-Lbl@{detection\-Node\-Lbl}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{detection\-Node\-Lbl}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-detection\-Node\-Lbl}}\label{classstaircaseai_1_1staircaseAI_ab2a668e0ee4a8c8eed4982275a34b9f8}
+
+
+Definition at line 99 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_af1b341a22ebf3a672a1168cb7bed7a18}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!detection\-Node\-Status@{detection\-Node\-Status}}
+\index{detection\-Node\-Status@{detection\-Node\-Status}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{detection\-Node\-Status}]{\setlength{\rightskip}{0pt plus 5cm}int staircaseai.\-staircase\-A\-I.\-detection\-Node\-Status = 0\hspace{0.3cm}{\ttfamily [static]}}}\label{classstaircaseai_1_1staircaseAI_af1b341a22ebf3a672a1168cb7bed7a18}
+
+
+Definition at line 16 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_ad3fdf6d0b4f17644da041f09e15b3ca7}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!detection\-Node\-Status@{detection\-Node\-Status}}
+\index{detection\-Node\-Status@{detection\-Node\-Status}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{detection\-Node\-Status}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-detection\-Node\-Status}}\label{classstaircaseai_1_1staircaseAI_ad3fdf6d0b4f17644da041f09e15b3ca7}
+
+
+Definition at line 206 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a87462cc129cb86ab0aaef5b8731cba6c}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!detection\-Process@{detection\-Process}}
+\index{detection\-Process@{detection\-Process}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{detection\-Process}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-detection\-Process}}\label{classstaircaseai_1_1staircaseAI_a87462cc129cb86ab0aaef5b8731cba6c}
+
+
+Definition at line 225 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a69f3626f7e9a387ecf066fc874fb9b15}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!detection\-Text@{detection\-Text}}
+\index{detection\-Text@{detection\-Text}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{detection\-Text}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-detection\-Text}}\label{classstaircaseai_1_1staircaseAI_a69f3626f7e9a387ecf066fc874fb9b15}
+
+
+Definition at line 44 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a40cdd3e980ae70333a716ceb08dde2bf}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!drone\-Autopilot\-Process@{drone\-Autopilot\-Process}}
+\index{drone\-Autopilot\-Process@{drone\-Autopilot\-Process}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{drone\-Autopilot\-Process}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-drone\-Autopilot\-Process}}\label{classstaircaseai_1_1staircaseAI_a40cdd3e980ae70333a716ceb08dde2bf}
+
+
+Definition at line 262 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_ac4392e3c93f4aedf23195b659ccef0c1}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!drone\-Gui\-Process@{drone\-Gui\-Process}}
+\index{drone\-Gui\-Process@{drone\-Gui\-Process}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{drone\-Gui\-Process}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-drone\-Gui\-Process}}\label{classstaircaseai_1_1staircaseAI_ac4392e3c93f4aedf23195b659ccef0c1}
+
+
+Definition at line 264 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a7e495d7bf55a5c90c7b6c342d93e3f58}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!drone\-Stateestimation\-Process@{drone\-Stateestimation\-Process}}
+\index{drone\-Stateestimation\-Process@{drone\-Stateestimation\-Process}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{drone\-Stateestimation\-Process}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-drone\-Stateestimation\-Process}}\label{classstaircaseai_1_1staircaseAI_a7e495d7bf55a5c90c7b6c342d93e3f58}
+
+
+Definition at line 260 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_ae21365d23660c43e89c13ef633c7fe65}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!goal\-Marker\-Publisher@{goal\-Marker\-Publisher}}
+\index{goal\-Marker\-Publisher@{goal\-Marker\-Publisher}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{goal\-Marker\-Publisher}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-goal\-Marker\-Publisher}}\label{classstaircaseai_1_1staircaseAI_ae21365d23660c43e89c13ef633c7fe65}
+
+
+Definition at line 55 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a5eacd7c55a1736b84c4d08031c9c8dbc}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!I\-D@{I\-D}}
+\index{I\-D@{I\-D}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{I\-D}]{\setlength{\rightskip}{0pt plus 5cm}string staircaseai.\-staircase\-A\-I.\-I\-D = \char`\"{}A\-I\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}}\label{classstaircaseai_1_1staircaseAI_a5eacd7c55a1736b84c4d08031c9c8dbc}
+
+
+Definition at line 12 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a77b90c85075237529ae93835fd2af2bd}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!image\-Rectify\-Process@{image\-Rectify\-Process}}
+\index{image\-Rectify\-Process@{image\-Rectify\-Process}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{image\-Rectify\-Process}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-image\-Rectify\-Process}}\label{classstaircaseai_1_1staircaseAI_a77b90c85075237529ae93835fd2af2bd}
+
+
+Definition at line 212 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a833c982cff34fb60a0fb6f66f80efb25}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!launcher@{launcher}}
+\index{launcher@{launcher}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{launcher}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-launcher}}\label{classstaircaseai_1_1staircaseAI_a833c982cff34fb60a0fb6f66f80efb25}
+
+
+Definition at line 166 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a4fe728ac07ff17300ede98396d4516dc}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!log\-Text@{log\-Text}}
+\index{log\-Text@{log\-Text}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{log\-Text}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-log\-Text}}\label{classstaircaseai_1_1staircaseAI_a4fe728ac07ff17300ede98396d4516dc}
+
+
+Definition at line 40 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a5e60775b7acf386fc10cb0ef2f118bc8}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!lsdslam\-Process@{lsdslam\-Process}}
+\index{lsdslam\-Process@{lsdslam\-Process}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{lsdslam\-Process}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-lsdslam\-Process}}\label{classstaircaseai_1_1staircaseAI_a5e60775b7acf386fc10cb0ef2f118bc8}
+
+
+Definition at line 217 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a027e1496f0f3ecf7be88e2d3986f5bd2}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!L\-S\-D\-S\-L\-A\-M\-Viewer\-Lbl@{L\-S\-D\-S\-L\-A\-M\-Viewer\-Lbl}}
+\index{L\-S\-D\-S\-L\-A\-M\-Viewer\-Lbl@{L\-S\-D\-S\-L\-A\-M\-Viewer\-Lbl}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{L\-S\-D\-S\-L\-A\-M\-Viewer\-Lbl}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-L\-S\-D\-S\-L\-A\-M\-Viewer\-Lbl}}\label{classstaircaseai_1_1staircaseAI_a027e1496f0f3ecf7be88e2d3986f5bd2}
+
+
+Definition at line 105 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_ac0e22a971bbe5e53dc1e085f7d4053b4}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!L\-S\-D\-S\-L\-A\-M\-Viewer\-Process@{L\-S\-D\-S\-L\-A\-M\-Viewer\-Process}}
+\index{L\-S\-D\-S\-L\-A\-M\-Viewer\-Process@{L\-S\-D\-S\-L\-A\-M\-Viewer\-Process}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{L\-S\-D\-S\-L\-A\-M\-Viewer\-Process}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-L\-S\-D\-S\-L\-A\-M\-Viewer\-Process}}\label{classstaircaseai_1_1staircaseAI_ac0e22a971bbe5e53dc1e085f7d4053b4}
+
+
+Definition at line 278 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a0ba4e3d2088a3c69b7afc3cdc40986c4}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!L\-S\-D\-S\-L\-A\-M\-Viewer\-Status@{L\-S\-D\-S\-L\-A\-M\-Viewer\-Status}}
+\index{L\-S\-D\-S\-L\-A\-M\-Viewer\-Status@{L\-S\-D\-S\-L\-A\-M\-Viewer\-Status}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{L\-S\-D\-S\-L\-A\-M\-Viewer\-Status}]{\setlength{\rightskip}{0pt plus 5cm}int staircaseai.\-staircase\-A\-I.\-L\-S\-D\-S\-L\-A\-M\-Viewer\-Status = 0\hspace{0.3cm}{\ttfamily [static]}}}\label{classstaircaseai_1_1staircaseAI_a0ba4e3d2088a3c69b7afc3cdc40986c4}
+
+
+Definition at line 18 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_ae6980c88f11e387fec4f4558e1fd60ec}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!L\-S\-D\-S\-L\-A\-M\-Viewer\-Status@{L\-S\-D\-S\-L\-A\-M\-Viewer\-Status}}
+\index{L\-S\-D\-S\-L\-A\-M\-Viewer\-Status@{L\-S\-D\-S\-L\-A\-M\-Viewer\-Status}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{L\-S\-D\-S\-L\-A\-M\-Viewer\-Status}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-L\-S\-D\-S\-L\-A\-M\-Viewer\-Status}}\label{classstaircaseai_1_1staircaseAI_ae6980c88f11e387fec4f4558e1fd60ec}
+
+
+Definition at line 275 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a40b886c5b0bd0895901671e0bdc1a006}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!rqt\-Image\-Viewer\-Lbl@{rqt\-Image\-Viewer\-Lbl}}
+\index{rqt\-Image\-Viewer\-Lbl@{rqt\-Image\-Viewer\-Lbl}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{rqt\-Image\-Viewer\-Lbl}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-rqt\-Image\-Viewer\-Lbl}}\label{classstaircaseai_1_1staircaseAI_a40b886c5b0bd0895901671e0bdc1a006}
+
+
+Definition at line 108 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a6d00dba2967e83eb5114c61381a1db29}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!rqt\-Image\-Viewer\-Process@{rqt\-Image\-Viewer\-Process}}
+\index{rqt\-Image\-Viewer\-Process@{rqt\-Image\-Viewer\-Process}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{rqt\-Image\-Viewer\-Process}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-rqt\-Image\-Viewer\-Process}}\label{classstaircaseai_1_1staircaseAI_a6d00dba2967e83eb5114c61381a1db29}
+
+
+Definition at line 290 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a1480f7f7d21ef55eac0d17876b33de1b}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!rqt\-Image\-Viewer\-Status@{rqt\-Image\-Viewer\-Status}}
+\index{rqt\-Image\-Viewer\-Status@{rqt\-Image\-Viewer\-Status}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{rqt\-Image\-Viewer\-Status}]{\setlength{\rightskip}{0pt plus 5cm}int staircaseai.\-staircase\-A\-I.\-rqt\-Image\-Viewer\-Status = 0\hspace{0.3cm}{\ttfamily [static]}}}\label{classstaircaseai_1_1staircaseAI_a1480f7f7d21ef55eac0d17876b33de1b}
+
+
+Definition at line 19 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a3bf21dbce86df4212e2a71d8449acfd3}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!rqt\-Image\-Viewer\-Status@{rqt\-Image\-Viewer\-Status}}
+\index{rqt\-Image\-Viewer\-Status@{rqt\-Image\-Viewer\-Status}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{rqt\-Image\-Viewer\-Status}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-rqt\-Image\-Viewer\-Status}}\label{classstaircaseai_1_1staircaseAI_a3bf21dbce86df4212e2a71d8449acfd3}
+
+
+Definition at line 287 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_ae050ef3b610f1f90003f74c89c6562c2}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!R\-V\-I\-Z\-Lbl@{R\-V\-I\-Z\-Lbl}}
+\index{R\-V\-I\-Z\-Lbl@{R\-V\-I\-Z\-Lbl}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{R\-V\-I\-Z\-Lbl}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-R\-V\-I\-Z\-Lbl}}\label{classstaircaseai_1_1staircaseAI_ae050ef3b610f1f90003f74c89c6562c2}
+
+
+Definition at line 102 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a54bcc18605f2331eeb8d42a0709b3590}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!R\-V\-I\-Z\-Process@{R\-V\-I\-Z\-Process}}
+\index{R\-V\-I\-Z\-Process@{R\-V\-I\-Z\-Process}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{R\-V\-I\-Z\-Process}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-R\-V\-I\-Z\-Process}}\label{classstaircaseai_1_1staircaseAI_a54bcc18605f2331eeb8d42a0709b3590}
+
+
+Definition at line 193 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_add2effa5e0e73d315ac2fc563c4370af}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!R\-V\-I\-Z\-Status@{R\-V\-I\-Z\-Status}}
+\index{R\-V\-I\-Z\-Status@{R\-V\-I\-Z\-Status}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{R\-V\-I\-Z\-Status}]{\setlength{\rightskip}{0pt plus 5cm}int staircaseai.\-staircase\-A\-I.\-R\-V\-I\-Z\-Status = 0\hspace{0.3cm}{\ttfamily [static]}}}\label{classstaircaseai_1_1staircaseAI_add2effa5e0e73d315ac2fc563c4370af}
+
+
+Definition at line 17 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_ac9966f9d12d8d3e73f0c5ac6891243c6}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!R\-V\-I\-Z\-Status@{R\-V\-I\-Z\-Status}}
+\index{R\-V\-I\-Z\-Status@{R\-V\-I\-Z\-Status}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{R\-V\-I\-Z\-Status}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-R\-V\-I\-Z\-Status}}\label{classstaircaseai_1_1staircaseAI_ac9966f9d12d8d3e73f0c5ac6891243c6}
+
+
+Definition at line 188 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a01c439ebe7570405bb22f82ba5a0bb3e}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!static\-Tf\-Process@{static\-Tf\-Process}}
+\index{static\-Tf\-Process@{static\-Tf\-Process}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{static\-Tf\-Process}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-static\-Tf\-Process}}\label{classstaircaseai_1_1staircaseAI_a01c439ebe7570405bb22f82ba5a0bb3e}
+
+
+Definition at line 209 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a1f55704fa569f33c5cabd6e89c549dc6}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!target\-Locked\-Text@{target\-Locked\-Text}}
+\index{target\-Locked\-Text@{target\-Locked\-Text}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{target\-Locked\-Text}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-target\-Locked\-Text}}\label{classstaircaseai_1_1staircaseAI_a1f55704fa569f33c5cabd6e89c549dc6}
+
+
+Definition at line 48 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_aa94cc788015f2cf55e5e0755b95341fe}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!target\-Sub@{target\-Sub}}
+\index{target\-Sub@{target\-Sub}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{target\-Sub}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-target\-Sub}}\label{classstaircaseai_1_1staircaseAI_aa94cc788015f2cf55e5e0755b95341fe}
+
+
+Definition at line 58 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a6b07562110670bd39dfaa76c3d289f4c}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!tum\-Ardrone\-Lbl@{tum\-Ardrone\-Lbl}}
+\index{tum\-Ardrone\-Lbl@{tum\-Ardrone\-Lbl}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{tum\-Ardrone\-Lbl}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-tum\-Ardrone\-Lbl}}\label{classstaircaseai_1_1staircaseAI_a6b07562110670bd39dfaa76c3d289f4c}
+
+
+Definition at line 96 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a94e2925e1c0eca37cbdbfc7201dabcb6}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!tum\-Ardrone\-Status@{tum\-Ardrone\-Status}}
+\index{tum\-Ardrone\-Status@{tum\-Ardrone\-Status}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{tum\-Ardrone\-Status}]{\setlength{\rightskip}{0pt plus 5cm}int staircaseai.\-staircase\-A\-I.\-tum\-Ardrone\-Status = 0\hspace{0.3cm}{\ttfamily [static]}}}\label{classstaircaseai_1_1staircaseAI_a94e2925e1c0eca37cbdbfc7201dabcb6}
+
+
+Definition at line 15 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_af27dfa875e03ac7646b25a655318e7e6}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!tum\-Ardrone\-Status@{tum\-Ardrone\-Status}}
+\index{tum\-Ardrone\-Status@{tum\-Ardrone\-Status}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{tum\-Ardrone\-Status}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-tum\-Ardrone\-Status}}\label{classstaircaseai_1_1staircaseAI_af27dfa875e03ac7646b25a655318e7e6}
+
+
+Definition at line 257 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a84126efb40c0a7d59dff2b930ec0a63c}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!tum\-Com\-Publisher@{tum\-Com\-Publisher}}
+\index{tum\-Com\-Publisher@{tum\-Com\-Publisher}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{tum\-Com\-Publisher}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-tum\-Com\-Publisher}}\label{classstaircaseai_1_1staircaseAI_a84126efb40c0a7d59dff2b930ec0a63c}
+
+
+Definition at line 56 of file staircaseai.\-py.
+
+\hypertarget{classstaircaseai_1_1staircaseAI_a95e3078cae642f3569ea7ea043cddc3f}{\index{staircaseai\-::staircase\-A\-I@{staircaseai\-::staircase\-A\-I}!window@{window}}
+\index{window@{window}!staircaseai::staircaseAI@{staircaseai\-::staircase\-A\-I}}
+\subsubsection[{window}]{\setlength{\rightskip}{0pt plus 5cm}staircaseai.\-staircase\-A\-I.\-window}}\label{classstaircaseai_1_1staircaseAI_a95e3078cae642f3569ea7ea043cddc3f}
+
+
+Definition at line 26 of file staircaseai.\-py.
+
+
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-staircaseai.\-py\end{DoxyCompactItemize}
+\hyperlink{staircaseai_8py}{staircaseai.\-py}\end{DoxyCompactItemize}

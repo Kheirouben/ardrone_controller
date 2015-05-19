@@ -4,5 +4,7 @@ digraph "keyboardcontroller.keyMapping"
   node [fontname="Helvetica",fontsize="10",shape=record];
   Node1 [label="keyboardcontroller.keyMapping",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
   Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid"];
-  Node2 [label="object",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node2 [label="object",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classobject.html"];
+  Node3 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" rollRight\nyawRight\nyawLeft\ntakeoff\ndecreaseAltitude\nemergency\nincreaseAltitude\npitchBackward\nexit\nland\n..." ];
+  Node3 [label="string",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
 }

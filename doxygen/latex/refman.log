@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.3.13)  15 MAY 2015 10:41
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.3.13)  16 MAY 2015 21:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -997,42 +997,292 @@ LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 22.39185pt on input line 127.
 LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
 (Font)              scaled to size 22.39185pt on input line 127.
- (./refman.toc)
+ (./refman.toc
+LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <10> not available
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 1.
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 8.99994pt on input line 1.
+LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 1.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ztmcm.fd
+File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
+)
+LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 1.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlztmcm.fd
+File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
+)
+LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 1.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsztmcm.fd
+File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
+)
+LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 1.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxztmcm.fd
+File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
+)
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 1.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
+ [3
+
+]
+LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <7> not available
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 72.
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 6.29996pt on input line 72.
+ [4] [5] [6]
+[7] [8] [9])
 \tf@toc=\write5
 \openout5 = `refman.toc'.
 
- [3
-
-] [4
-
-]
+ [10]
 Package hyperref Info: Option `pageanchor' set `true' on input line 130.
 
+Chapter 1.
+LaTeX Font Info:    Font shape `T1/phv/m/n' will be
+(Font)              scaled to size 18.66588pt on input line 133.
+LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <20.74> not available
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 133.
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 18.66588pt on input line 133.
+LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
+(Font)              scaled to size 18.66588pt on input line 133.
+(./namespaceardrone__gui__controller.tex
+LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <14.4> not available
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 3.
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 12.9599pt on input line 3.
+LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
+(Font)              scaled to size 12.9599pt on input line 3.
+LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <12> not available
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 4.
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 10.79993pt on input line 4.
+LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
+(Font)              scaled to size 10.79993pt on input line 4.
+LaTeX Font Info:    Try loading font information for TS1+phv on input line 7.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1phv.fd
+File: ts1phv.fd 2001/06/04 scalable font definitions for TS1/phv.
+)
+LaTeX Font Info:    Font shape `TS1/phv/m/n' will be
+(Font)              scaled to size 8.99994pt on input line 7.
+LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
+(Font)              scaled to size 8.99994pt on input line 29.
+)
+(./namespaceardroneguicontroller.tex [1
+
+
+]) (./namespacebasicdronecontroller.tex) (./namespaceclusterNode.tex) (./namesp
+acegamepadcontroller.tex)
+(./namespacekeyboardcontroller.tex) (./namespacemarkerClass.tex)
+(./namespacestaircaseai.tex) [2]
+Chapter 2.
+(./classardroneguicontroller_1_1ardroneGUIController.tex
+LaTeX Font Info:    Font shape `T1/phv/bc/it' in size <10> not available
+(Font)              Font shape `T1/phv/bc/sl' tried instead on input line 62.
+LaTeX Font Info:    Font shape `T1/phv/bc/sl' will be
+(Font)              scaled to size 8.99994pt on input line 62.
+ [3
+
+] [4])
+(./classbasicdronecontroller_1_1basicDroneController.tex
+<classbasicdronecontroller_1_1basicDroneController__inherit__graph.pdf, id=1603
+, 210.7875pt x 168.63pt>
+File: classbasicdronecontroller_1_1basicDroneController__inherit__graph.pdf Gra
+phic file (type pdf)
+
+<use classbasicdronecontroller_1_1basicDroneController__inherit__graph.pdf>
+Package pdftex.def Info: classbasicdronecontroller_1_1basicDroneController__inh
+erit__graph.pdf used on input line 11.
+(pdftex.def)             Requested size: 210.0pt x 168.00432pt.
+
+<classbasicdronecontroller_1_1basicDroneController__coll__graph.pdf, id=1604, 2
+34.8775pt x 180.675pt>
+File: classbasicdronecontroller_1_1basicDroneController__coll__graph.pdf Graphi
+c file (type pdf)
+
+<use classbasicdronecontroller_1_1basicDroneController__coll__graph.pdf>
+Package pdftex.def Info: classbasicdronecontroller_1_1basicDroneController__col
+l__graph.pdf used on input line 21.
+(pdftex.def)             Requested size: 234.0pt x 179.9991pt.
+
+Underfull \vbox (badness 6284) has occurred while \output is active []
+
+ [5 <./classbasicdronecontroller_1_1basicDroneController__inherit__graph.pdf>] 
+[6 <./classbasicdronecontroller_1_1basicDroneController__coll__graph.pdf>]
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 177.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
+)
+
+LaTeX Font Warning: Font shape `T1/pcr/bc/it' undefined
+(Font)              using `T1/pcr/m/n' instead on input line 177.
+
+[7]
+
+LaTeX Font Warning: Font shape `T1/pcr/bc/n' undefined
+(Font)              using `T1/pcr/m/n' instead on input line 208.
+
+) (./classclusterNode_1_1Cluster.tex [8] [9])
+(./classclusterNode_1_1clusterNode.tex
+LaTeX Font Info:    Font shape `T1/phv/m/it' in size <9> not available
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 8.
+LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
+(Font)              scaled to size 8.09995pt on input line 8.
+ [10] [11])
+(./classbasicdronecontroller_1_1droneStatus.tex
+<classbasicdronecontroller_1_1droneStatus__inherit__graph.pdf, id=1763, 210.787
+5pt x 168.63pt>
+File: classbasicdronecontroller_1_1droneStatus__inherit__graph.pdf Graphic file
+ (type pdf)
+
+<use classbasicdronecontroller_1_1droneStatus__inherit__graph.pdf>
+Package pdftex.def Info: classbasicdronecontroller_1_1droneStatus__inherit__gra
+ph.pdf used on input line 11.
+(pdftex.def)             Requested size: 210.0pt x 168.00432pt.
+
+Underfull \vbox (badness 7851) has occurred while \output is active []
+
+ [12]
+<classbasicdronecontroller_1_1droneStatus__coll__graph.pdf, id=1768, 217.81375p
+t x 291.0875pt>
+File: classbasicdronecontroller_1_1droneStatus__coll__graph.pdf Graphic file (t
+ype pdf)
+
+<use classbasicdronecontroller_1_1droneStatus__coll__graph.pdf>
+Package pdftex.def Info: classbasicdronecontroller_1_1droneStatus__coll__graph.
+pdf used on input line 21.
+(pdftex.def)             Requested size: 217.0pt x 289.99857pt.
+ [13 <./classbasicdronecontroller_1_1droneStatus__inherit__graph.pdf> <./classb
+asicdronecontroller_1_1droneStatus__coll__graph.pdf
+
+pdfTeX warning: pdflatex (file ./classbasicdronecontroller_1_1droneStatus__coll
+__graph.pdf): PDF inclusion: multiple pdfs with page group included in a single
+ page
+>] [14]) (./classgamepadcontroller_1_1gamepadController.tex
+<classgamepadcontroller_1_1gamepadController__coll__graph.pdf, id=1810, 300.121
+25pt x 246.9225pt>
+File: classgamepadcontroller_1_1gamepadController__coll__graph.pdf Graphic file
+ (type pdf)
+
+<use classgamepadcontroller_1_1gamepadController__coll__graph.pdf>
+Package pdftex.def Info: classgamepadcontroller_1_1gamepadController__coll__gra
+ph.pdf used on input line 11.
+(pdftex.def)             Requested size: 299.0pt x 246.02138pt.
+ [15 <./classgamepadcontroller_1_1gamepadController__coll__graph.pdf>] [16] [17
+] [18])
+(./classkeyboardcontroller_1_1keyboardController.tex
+<classkeyboardcontroller_1_1keyboardController__coll__graph.pdf, id=1902, 218.8
+175pt x 224.84pt>
+File: classkeyboardcontroller_1_1keyboardController__coll__graph.pdf Graphic fi
+le (type pdf)
+
+<use classkeyboardcontroller_1_1keyboardController__coll__graph.pdf>
+Package pdftex.def Info: classkeyboardcontroller_1_1keyboardController__coll__g
+raph.pdf used on input line 11.
+(pdftex.def)             Requested size: 218.0pt x 224.00233pt.
+ [19 <./classkeyboardcontroller_1_1keyboardController__coll__graph.pdf>] [20])
+(./classkeyboardcontroller_1_1keyMapping.tex
+<classkeyboardcontroller_1_1keyMapping__inherit__graph.pdf, id=1953, 232.87pt x
+ 156.585pt>
+File: classkeyboardcontroller_1_1keyMapping__inherit__graph.pdf Graphic file (t
+ype pdf)
+ <use classkeyboardcontroller_1_1keyMapping__inherit__graph.pdf>
+Package pdftex.def Info: classkeyboardcontroller_1_1keyMapping__inherit__graph.
+pdf used on input line 11.
+(pdftex.def)             Requested size: 232.0pt x 156.0064pt.
+
+<classkeyboardcontroller_1_1keyMapping__coll__graph.pdf, id=1954, 253.94875pt x
+ 279.0425pt>
+File: classkeyboardcontroller_1_1keyMapping__coll__graph.pdf Graphic file (type
+ pdf)
+ <use classkeyboardcontroller_1_1keyMapping__coll__graph.pdf>
+Package pdftex.def Info: classkeyboardcontroller_1_1keyMapping__coll__graph.pdf
+ used on input line 21.
+(pdftex.def)             Requested size: 253.0pt x 278.0114pt.
+
+[21 <./classkeyboardcontroller_1_1keyMapping__inherit__graph.pdf>] [22 <./class
+keyboardcontroller_1_1keyMapping__coll__graph.pdf>])
+(./classmarkerClass_1_1markerArrayRVIZ.tex [23] [24]) (./classobject.tex
+<classobject__inherit__graph.pdf, id=2035, 313.17pt x 198.7425pt>
+File: classobject__inherit__graph.pdf Graphic file (type pdf)
+
+<use classobject__inherit__graph.pdf>
+Package pdftex.def Info: classobject__inherit__graph.pdf used on input line 11.
+
+(pdftex.def)             Requested size: 312.0pt x 198.00812pt.
+) (./classclusterNode_1_1Point.tex
+[25 <./classobject__inherit__graph.pdf>])
+(./classstaircaseai_1_1staircaseAI.tex
+<classstaircaseai_1_1staircaseAI__coll__graph.pdf, id=2060, 263.98625pt x 222.8
+325pt>
+File: classstaircaseai_1_1staircaseAI__coll__graph.pdf Graphic file (type pdf)
+ <use classstaircaseai_1_1staircaseAI__coll__graph.pdf>
+Package pdftex.def Info: classstaircaseai_1_1staircaseAI__coll__graph.pdf used 
+on input line 11.
+(pdftex.def)             Requested size: 263.0pt x 222.01251pt.
+
+Underfull \vbox (badness 7238) has occurred while \output is active []
+
+ [26]
+[27 <./classstaircaseai_1_1staircaseAI__coll__graph.pdf>] [28] [29] [30]
+[31] [32] [33]) [34]
+Chapter 3.
+(./ardrone__gui__controller_8py.tex) (./ardroneguicontroller_8py.tex)
+(./basicdronecontroller_8py.tex [35
+
+]) (./clusterNode_8py.tex)
+(./gamepadcontroller_8py.tex) (./keyboardcontroller_8py.tex)
+(./markerClass_8py.tex) (./staircaseai_8py.tex [36]) [37]
 No file refman.ind.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 141.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 141.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 172.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 172.
 (./refman.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 141.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 141.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 172.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 172.
 Package rerunfilecheck Info: File `refman.out' has not changed.
-(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 141.
+(rerunfilecheck)             Checksum: 325E8EAE45E1BED7B9D571FDDBCE6C7C;43566.
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 172.
  ) 
 Here is how much of TeX's memory you used:
- 11903 strings out of 495028
- 163735 string characters out of 6181497
- 241840 words of memory out of 5000000
- 14968 multiletter control sequences out of 15000+600000
- 20909 words of font info for 26 fonts, out of 8000000 for 9000
+ 13369 strings out of 495028
+ 217439 string characters out of 6181497
+ 263697 words of memory out of 5000000
+ 15691 multiletter control sequences out of 15000+600000
+ 62816 words of font info for 77 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 48i,11n,43p,254b,359s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 48i,13n,43p,470b,416s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
-e/texmf-dist/fonts/type1/urw/helvetic/uhvb8ac.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on refman.pdf (4 pages, 14339 bytes).
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/he
+lvetic/uhvb8ac.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb
+o8ac.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
+Output written on refman.pdf (47 pages, 226680 bytes).
 PDF statistics:
- 31 PDF objects out of 1000 (max. 8388607)
- 22 compressed objects within 1 object stream
- 2 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2452 PDF objects out of 2487 (max. 8388607)
+ 2352 compressed objects within 24 object streams
+ 622 named destinations out of 1000 (max. 500000)
+ 2363 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -135,7 +135,7 @@ class clusterNode:
     def processPoints(self,pointStamped):
         """Process incoming points. Project to '/map' coordinates and puts them into an array"""
         #pointStamped.header.stamp = rospy.Time()
-        rospy.sleep(1.)
+        rospy.sleep(0.5)
         nP = self.tf_listener.transformPoint('/map',pointStamped) # new Point
         self.pointArray.append(Point([nP.point.x,nP.point.y,nP.point.z]))
         self.targetMarkers.addMarker([nP.point.x,nP.point.y,nP.point.z])

@@ -62,8 +62,8 @@ class staircaseAI:
         titleTopCenter = tk.Label(self.window, text="Toggle ON/OFF", font=("Helvetica", 18))
         titleTopRight = tk.Label(self.window, text="Status", font=("Helvetica", 18))
         titleCenterLeft = tk.Label(self.window, text="Staircase Guidance", font=("Helvetica", 18))
-        titleBottomLeft = tk.Label(self.window, text="DETECTION", font=("Helvetica", 18))
-        titleBottomRight = tk.Label(self.window, text="LOG", font=("Helvetica", 18))
+        titleBottomLeft = tk.Label(self.window, text="Detection", font=("Helvetica", 18))
+        titleBottomRight = tk.Label(self.window, text="Log", font=("Helvetica", 18))
 
         # Define buttons (LEFT)
         initBtn     = tk.Button(self.window,text="Initialize",command=self.initializeAI)
@@ -207,8 +207,6 @@ class staircaseAI:
             self.imageRectifyProcess = self.launcher.launch(node)
             # Launch lsd_slam_core
             node = roslaunch.core.Node('lsd_slam_core','live_slam','lsd_slam_core_ardrone','','','image:=/ardrone/front/image_rect camera_info:=/ardrone/front/camera_info')
-            rospy.set_param('minUseGrad',15)
-            rospy.set_param('cameraPixelNoise',30)
             self.lsdslamProcess = self.launcher.launch(node)
             # Reconfigure lsd_slam_core
             dynConfLSDSLAM = dynamic_reconfigure.client.Client('lsd_slam_core_ardrone')
@@ -235,11 +233,6 @@ class staircaseAI:
         if self.ardroneDriverStatus==0:
             # Launch ardrone_driver
             node = roslaunch.core.Node('ardrone_autonomy','ardrone_driver','ardrone_driver','','','-ip 192.168.2.165 _realtime_navdata:=True _navdata_demo:=0 _looprate:=30 _realtime_video:=False _altitude_max:=10000')
-            #rospy.set_param('/ardrone_driver/realtime_video', False)
-            #rospy.set_param('/ardrone_driver/navdata_demo', False)
-            #rospy.set_param('/ardrone_driver/looprate', 30)
-            #rospy.set_param('/ardrone_driver/altitude_max', 10000)
-            #rospy.set_param('/ardrone_driver/realtime_navdata', True)
             self.ardroneDriverProcess = self.launcher.launch(node)
             self.ardroneDriverLbl.configure(fg='blue',text='ON')
             self.ardroneDriverStatus=1
@@ -253,7 +246,7 @@ class staircaseAI:
             # Launch tum_ardrone
             node = roslaunch.core.Node('tum_ardrone','drone_stateestimation','drone_stateestimation_ardrone')
             self.droneStateestimationProcess = self.launcher.launch(node)
-            node = roslaunch.core.Node('tum_ardrone','drone_autopilot','drone_autopilot_ardrone')
+            node = roslaunch.core.Node('tum_ardrone','drone_autopilot','drone_autopilot_ardrone','','','_agressiveness:=0.7')
             self.droneAutopilotProcess = self.launcher.launch(node)
             node = roslaunch.core.Node('tum_ardrone','drone_gui','drone_gui_ardrone')
             self.droneGuiProcess = self.launcher.launch(node)
@@ -309,21 +302,29 @@ class staircaseAI:
         if len(self.cluster.targetPoint)!=0:
             commands = []
             commands.append('c clearCommands')
-            commands.append('c goto %f %f %f 0' % (self.cluster.targetPoint[0],self.cluster.targetPoint[1],self.cluster.targetPoint[2]))
+            commands.append('c goto %f %f %f 0' % (self.cluster.targetPoint[0],self.cluster.targetPoint[1],self.cluster.targetPoint[2]+0.5))
             # Publish commands
             for i in range(0,len(commands)):
                 self.tumComPublisher.publish(commands[i])
 
     def resetEKF(self):
-        command = 'f reset'
-        self.tumComPublisher.publish(command)
+        commands = []
+        commands.append('c stop')
+        commands.append('c clearCommands')
+        commands.append('f reset')
+        for i in range(0,len(commands)):
+            self.tumComPublisher.publish(commands[i])
         self.cluster.reset()
         self.log('EKF is resetted')
         self.logDet('Cluster is resetted, points are flushed')
 
     def resetPTAM(self):
-        command = 'p reset'
-        self.tumComPublisher.publish(command)
+        commands = []
+        commands.append('c stop')
+        commands.append('c clearCommands')
+        commands.append('p reset')
+        for i in range(0,len(commands)):
+            self.tumComPublisher.publish(commands[i])
         self.log('PTAM is resetted')
 
     def resetLSDSLAM(self):
@@ -336,7 +337,19 @@ class staircaseAI:
         self.log('LSD-SLAM is resetted')
 
     def initLSDSLAM(self):
-	self.resetLSDSLAM()
+        commands = []
+        commands.append('c clearCommands')
+        commands.append('c setReference 0 0 0 0')
+        commands.append('c goto 0.5 0 1 0')
+        commands.append('c goto -0.5 0 1 0')
+        commands.append('c goto 0.5 0 1 0')
+        commands.append('c goto -0.5 0 1.5 0')
+        commands.append('c goto 0.5 0 1.5 0')
+        commands.append('c goto 0 0 1 0')
+        for i in range(0,len(commands)):
+            self.tumComPublisher.publish(commands[i])
+        rospy.sleep(2.0)
+        #self.resetLSDSLAM()
 
     def initializeAI(self):
         self.log('Initializing AI')
@@ -345,19 +358,19 @@ class staircaseAI:
         else:
             self.log('Sending commands to the drone')
             commands = []
-            #commands.append('c clearCommands')
+            commands.append('c stop')
+            commands.append('c clearCommands')
             commands.append('f reset')
-            commands.append('c autoInit 1000 800 4000 0.3')
+            commands.append('c autoInit 1000 800 2000 0.3')
             commands.append('c setReference $POSE$')
+            #commands.append('c setReference 0 0 0 0')
             commands.append('c setInitialReachDist 0.2')
             commands.append('c setStayWithinDist 0.3')
             commands.append('c setStayTime 3')
             commands.append('c lockScaleFP')
+            commands.append('c goto 0 0 1 0')
             commands.append('c goto 0 0 0 0')
             commands.append('c start')
-            #commands.append('c goto 0 0 0.5 0')
-            #commands.append('c goto 0 0 0 0')
-            #commands.append('c goto 0 0 0.5 0')
             
             # Publish commands
             for i in range(0,len(commands)):

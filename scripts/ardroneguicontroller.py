@@ -92,3 +92,9 @@ class ardroneGUIController:
         else:
             print "ERROR: rospy.is_shutdown == 1"
             sys.exit(0)
+
+    def close(self):
+        try:
+            self.app.close()
+        except:
+            pass

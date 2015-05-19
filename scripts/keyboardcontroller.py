@@ -19,6 +19,7 @@ class keyMapping(object):
 
 
 class keyboardController:
+    aggresivness = 1
     pitch = 0
     roll = 0
     yaw_velocity = 0 
@@ -30,6 +31,7 @@ class keyboardController:
         self.window.title("Keyboard Controller")
         img = tk.PhotoImage(file=CONTROLLER.PATH+'/media/keyboardlogo.gif')
         self.window.tk.call('wm', 'iconphoto', self.window._w, img)
+        self.window.protocol("WM_DELETE_WINDOW", self.close)
         self.window.geometry("%dx%d%+d%+d" % (300, 280, 250, 125))
         self.window.bind("<Key>", self.key)
         self.window.bind("<KeyRelease>", self.onkeyrelease)
@@ -57,21 +59,21 @@ class keyboardController:
                 self.controller.sendEmergency(self.ID)
             else:
                 if key == keyMapping.pitchForward:
-                    self.pitch += 1
+                    self.pitch += 1*self.aggresivness
                 elif key == keyMapping.pitchBackward:
-                    self.pitch += -1
+                    self.pitch += -1*self.aggresivness
                 elif key == keyMapping.rollLeft:
-                    self.roll += 1
+                    self.roll += 1*self.aggresivness
                 elif key == keyMapping.rollRight:
-                    self.roll += -1
+                    self.roll += -1*self.aggresivness
                 elif key == keyMapping.yawLeft:
-                    self.yaw_velocity += 1
+                    self.yaw_velocity += 1*self.aggresivness
                 elif key == keyMapping.yawRight:
-                    self.yaw_velocity += -1
+                    self.yaw_velocity += -1*self.aggresivness
                 elif key == keyMapping.increaseAltitude:
-                    self.z_velocity += 1
+                    self.z_velocity += 1*self.aggresivness
                 elif key == keyMapping.decreaseAltitude:
-                    self.z_velocity += -1
+                    self.z_velocity += -1*self.aggresivness
                 elif key == keyMapping.exit:
                     rospy.signal_shutdown('Great Flying!')
                     sys.exit(1)
@@ -79,3 +81,8 @@ class keyboardController:
                     print "ERROR: Not a configured key"
 
         self.controller.setCommand(self.roll, self.pitch, self.yaw_velocity, self.z_velocity,self.ID)
+        
+    def close(self):
+        """Close the Keyboard GUI interface"""
+        self.window.destroy()
+        rospy.loginfo("Keyboard Controller is destroyed")
