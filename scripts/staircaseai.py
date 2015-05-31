@@ -134,8 +134,8 @@ class staircaseAI:
         sendCommandBtn.grid(row=4,column=2,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
 
         goBtn.grid(row=6,column=0,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
-        updateClusterBtn.grid(row=6,column=0,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
-        resetClusterBtn.grid(row=6,column=1,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
+        updateClusterBtn.grid(row=6,column=1,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
+        resetClusterBtn.grid(row=6,column=2,columnspan=1,sticky=tk.N+tk.E+tk.S+tk.W)
 
         self.detectionText.grid(row=9,column=0,rowspan=1,columnspan=3,sticky=tk.N+tk.E+tk.S+tk.W)
 
@@ -290,8 +290,12 @@ class staircaseAI:
         self.log('The command: '+command+' is sent to the drone')
 
     def stopAI(self):
-        command = 'c stop'
-        self.tumComPublisher.publish(command)
+        commands = []
+        commands.append('c stop')
+        commands.append('c clearCommands')
+        for i in range(0,len(commands)):
+            self.tumComPublisher.publish(commands[i])
+        self.log('Commands are flushed and drone is stopped')
 
     def goAI(self):
         self.log('Sending the drone to the target.')
