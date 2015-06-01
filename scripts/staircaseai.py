@@ -303,7 +303,8 @@ class staircaseAI:
         if len(self.cluster.targetPoint)!=0:
             commands = []
             commands.append('c clearCommands')
-            commands.append('c goto %f %f %f 0' % (self.cluster.targetPoint[0],self.cluster.targetPoint[1],self.cluster.targetPoint[2]))
+            commands.append('c setReference 0 0 0 0')
+            commands.append('c goto %f %f %f 0' % (self.cluster.targetPoint[1],self.cluster.targetPoint[0],self.cluster.targetPoint[2]))
             # Publish commands
             for i in range(0,len(commands)):
                 self.tumComPublisher.publish(commands[i])
@@ -337,20 +338,21 @@ class staircaseAI:
             print "Service call failed: %s"%e
         self.log('LSD-SLAM is resetted')
 
+
     def initLSDSLAM(self):
         commands = []
-        commands.append('c clearCommands')
-        commands.append('c setReference 0 0 0 0')
-        commands.append('c goto 0.5 0 1 0')
-        commands.append('c goto -0.5 0 1 0')
-        commands.append('c goto 0.5 0 1 0')
-        commands.append('c goto -0.5 0 1.5 0')
-        commands.append('c goto 0.5 0 1.5 0')
-        commands.append('c goto 0 0 1 0')
+        #commands.append('c clearCommands')
+        #commands.append('c setReference 0 0 0 0')
+        commands.append('c goto 0.5 0 0 0')
+        commands.append('c goto -0.5 0 0 0')
+        commands.append('c goto 0.5 0 0 0')
+        commands.append('c goto -0.5 0 0.5 0')
+        commands.append('c goto 0.5 0 0.5 0')
+        commands.append('c goto 0 0 0 0')
         for i in range(0,len(commands)):
             self.tumComPublisher.publish(commands[i])
         rospy.sleep(2.0)
-        #self.resetLSDSLAM()
+        self.resetLSDSLAM()
 
     def initializeAI(self):
         self.log('Initializing AI')
@@ -361,19 +363,25 @@ class staircaseAI:
         else:
             self.log('Sending commands to the drone')
             commands = []
-            commands.append('c stop')
-            commands.append('c clearCommands')
-            commands.append('f reset')
-            commands.append('c autoInit 1000 800 1000 0.3')
+            # commands.append('c stop')
+            # commands.append('c clearCommands')
+            # commands.append('f reset')
+            # commands.append('c autoInit 1000 800 1000 0.3')
+            # commands.append('c setReference $POSE$')
+            # #commands.append('c setReference 0 0 0 0')
+            # commands.append('c setInitialReachDist 0.2')
+            # commands.append('c setStayWithinDist 0.3')
+            # commands.append('c setStayTime 3')
+            # #commands.append('c lockScaleFP')
+            # commands.append('c goto 0 0 0.5 0')
+            # commands.append('c goto 0 0 0 0')
+            # commands.append('c start')
             commands.append('c setReference $POSE$')
-            #commands.append('c setReference 0 0 0 0')
             commands.append('c setInitialReachDist 0.2')
             commands.append('c setStayWithinDist 0.3')
-            commands.append('c setStayTime 3')
-            #commands.append('c lockScaleFP')
-            commands.append('c goto 0 0 0.5 0')
+            commands.append('c setStayTime 2')
+            commands.append('c lockScaleFP')
             commands.append('c goto 0 0 0 0')
-            commands.append('c start')
             
             # Publish commands
             for i in range(0,len(commands)):

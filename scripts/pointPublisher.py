@@ -14,7 +14,7 @@ def talker():
         m.header.stamp = rospy.Time.now()
         m.point.x = 0.0
         m.point.y = -1.0
-        m.point.z = 1.0
+        m.point.z = 2.0
         log_str = "Send point to /pointcloudregistration/target"
         rospy.loginfo(log_str)
         pub.publish(m)

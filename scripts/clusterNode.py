@@ -134,8 +134,8 @@ class clusterNode:
 
     def processPoints(self,pointStamped):
         """Process incoming points. Project to '/map' coordinates and puts them into an array"""
-        #pointStamped.header.stamp = rospy.Time()
-        rospy.sleep(0.5)
+        pointStamped.header.stamp = rospy.Time()
+        #rospy.sleep(0.5)
         nP = self.tf_listener.transformPoint('/map',pointStamped) # new Point
         self.pointArray.append(Point([nP.point.x,nP.point.y,nP.point.z]))
         self.targetMarkers.addMarker([nP.point.x,nP.point.y,nP.point.z])
@@ -147,7 +147,7 @@ class clusterNode:
                 self.targetPoint = self.agglomerativeClustering(self.pointArray,self.linkage,self.agglo_cutoff,self.verbosity)
                 self.goalMarker.addMarker(self.targetPoint)
                 self.targetLocked = 1
-                message = 'Agglomerative clustering produced goal:'+str(self.targetPoint)
+                message = 'Agglomerative clustering produced goal:'+str([self.targetPoint[1],self.targetPoint[0],self.targetPoint[2])
                 self.log(str(message))
                 self.targetLabel.set('YES')
                 print '\nTarget set to ', self.targetPoint,'\n'
@@ -196,6 +196,7 @@ class clusterNode:
                 for k in clusters[biggestCluster].points:
                     clusterCenter+=numpy.array(k.coords)
                 clusterCenter = clusterCenter/float(max(clustersSize))
+                #clusterCenter = [clusterCenter[1],clusterCenter[0],clusterCenter[2]]
                 if verbosity==1:
                     print '\nAgglomerative cluster algorithm formed '+str(len(clusters))+' clusters from '+str(sum(clustersSize))+' points'
                     print '  The biggest cluster contains '+str(max(clustersSize))+' points'
