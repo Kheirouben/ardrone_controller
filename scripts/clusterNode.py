@@ -147,7 +147,7 @@ class clusterNode:
                 self.targetPoint = self.agglomerativeClustering(self.pointArray,self.linkage,self.agglo_cutoff,self.verbosity)
                 self.goalMarker.addMarker(self.targetPoint)
                 self.targetLocked = 1
-                message = 'Agglomerative clustering produced goal:'+str([self.targetPoint[1],self.targetPoint[0],self.targetPoint[2])
+                message = 'Agglomerative clustering produced goal:'+str([self.targetPoint[0],self.targetPoint[1],self.targetPoint[2]])
                 self.log(str(message))
                 self.targetLabel.set('YES')
                 print '\nTarget set to ', self.targetPoint,'\n'

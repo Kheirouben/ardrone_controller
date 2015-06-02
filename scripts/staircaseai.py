@@ -304,7 +304,7 @@ class staircaseAI:
             commands = []
             commands.append('c clearCommands')
             commands.append('c setReference 0 0 0 0')
-            commands.append('c goto %f %f %f 0' % (self.cluster.targetPoint[1],self.cluster.targetPoint[0],self.cluster.targetPoint[2]))
+            commands.append('c goto %f %f %f 0' % (-self.cluster.targetPoint[1],self.cluster.targetPoint[0]+0.5,self.cluster.targetPoint[2]))
             # Publish commands
             for i in range(0,len(commands)):
                 self.tumComPublisher.publish(commands[i])
@@ -356,36 +356,39 @@ class staircaseAI:
 
     def initializeAI(self):
         self.log('Initializing AI')
-        if self.controller.status == droneStatus.Flying or self.controller.status == droneStatus.GotoHover or self.controller.status == droneStatus.Hovering:
-            self.log('Drone is already in the air')
-        elif self.controller.status == droneStatus.Emergency:
-            self.log('Drone is in emergency status. Please click the emergency button.')
-        else:
-            self.log('Sending commands to the drone')
-            commands = []
-            # commands.append('c stop')
-            # commands.append('c clearCommands')
-            # commands.append('f reset')
-            # commands.append('c autoInit 1000 800 1000 0.3')
-            # commands.append('c setReference $POSE$')
-            # #commands.append('c setReference 0 0 0 0')
-            # commands.append('c setInitialReachDist 0.2')
-            # commands.append('c setStayWithinDist 0.3')
-            # commands.append('c setStayTime 3')
-            # #commands.append('c lockScaleFP')
-            # commands.append('c goto 0 0 0.5 0')
-            # commands.append('c goto 0 0 0 0')
-            # commands.append('c start')
-            commands.append('c setReference $POSE$')
-            commands.append('c setInitialReachDist 0.2')
-            commands.append('c setStayWithinDist 0.3')
-            commands.append('c setStayTime 2')
-            commands.append('c lockScaleFP')
-            commands.append('c goto 0 0 0 0')
-            
-            # Publish commands
-            for i in range(0,len(commands)):
-                self.tumComPublisher.publish(commands[i])
+        #if self.controller.status == droneStatus.Flying or self.controller.status == droneStatus.GotoHover or self.controller.status == droneStatus.Hovering:
+        #    self.log('Drone is already in the air')
+        #elif self.controller.status == droneStatus.Emergency:
+        #    self.log('Drone is in emergency status. Please click the emergency button.')
+        #else:
+        self.log('Sending commands to the drone')
+        commands = []
+        # commands.append('c stop')
+        # commands.append('c clearCommands')
+        # commands.append('f reset')
+        # commands.append('c autoInit 1000 800 1000 0.3')
+        # commands.append('c setReference $POSE$')
+        # #commands.append('c setReference 0 0 0 0')
+        # commands.append('c setInitialReachDist 0.2')
+        # commands.append('c setStayWithinDist 0.3')
+        # commands.append('c setStayTime 3')
+        # #commands.append('c lockScaleFP')
+        # commands.append('c goto 0 0 0.5 0')
+        # commands.append('c goto 0 0 0 0')
+        # commands.append('c start')
+        commands.append('c stop')
+        commands.append('c clearCommands')
+        commands.append('c setReference $POSE$')
+        commands.append('c setInitialReachDist 0.2')
+        commands.append('c setStayWithinDist 0.3')
+        commands.append('c setStayTime 2')
+        commands.append('c lockScaleFP')
+        commands.append('c goto 0 0 0 0')
+        commands.append('c start')
+        
+        # Publish commands
+        for i in range(0,len(commands)):
+            self.tumComPublisher.publish(commands[i])
 
     def takeoff(self):
         self.takeoffPublisher.publish(Empty)
